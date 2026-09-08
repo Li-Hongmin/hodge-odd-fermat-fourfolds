@@ -1,0 +1,4 @@
+.lake/
+__pycache__/
+lean/verification/
+lean/PrintAxioms.lean

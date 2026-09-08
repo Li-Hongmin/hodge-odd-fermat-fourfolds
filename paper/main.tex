@@ -1,0 +1,2083 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{array,longtable,pdflscape}
+\usepackage[expansion=false]{microtype}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\numberwithin{theorem}{section}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}{Claim}[theorem]
+\newtheorem{lemmaextra}{Lemma}[section]
+\renewcommand{\thelemmaextra}{\thesection.\Alph{lemmaextra}}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{remark*}{Remark}
+\numberwithin{equation}{section}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\title{The Hodge Conjecture for Odd-Degree Fermat Fourfolds}
+\author{Hongmin Li}
+\address{Graduate School of Frontier Sciences, The University of Tokyo}
+\email{lihongmin@edu.k.u-tokyo.ac.jp}
+\keywords{Hodge conjecture, Fermat fourfolds, algebraic cycles, character sums, conductor descent}
+\subjclass[2020]{14C25, 14C30, 14J35}
+\date{September 7, 2026}
+\hypersetup{pdftitle={The Hodge Conjecture for Odd-Degree Fermat Fourfolds},pdfauthor={Hongmin Li}}
+
+\begin{document}
+
+\begin{abstract}
+
+Let
+\[
+X_m^4=\{x_0^m+\cdots+x_5^m=0\}\subset \mathbf P^5
+\]
+be the Fermat fourfold of odd degree \(m\). We prove that the rational cycle
+class map
+\[
+CH^2(X_m^4)_{\mathbf Q}\longrightarrow
+H^4(X_m^4,\mathbf Q)\cap H^{2,2}(X_m^4)
+\]
+is surjective for every odd \(m\ge 3\). The proof is uniform in the conductor
+and reduces every odd conductor to a fixed finite list of endpoint families,
+which are then realized by explicit cycles. We encode primitive rational Hodge
+structures by unit orbits of length-six Fermat characters, resolve their exact
+orders by divisor-lattice Fourier projectors, and prove a descent-or-packet
+classification. Every terminal packet is realized by an algebraic
+correspondence built from Fermat-surface divisors, Aoki standard cycles, Ran
+joins, inverse-pair contractions, and finite power maps. Same-degree surface
+completion resolves active high-three and high-five orders without imposing
+divisibility on their complements. A sharp global \(\ell^1\) ledger then
+controls ambient one-small completions and the four-face system at the
+mixed base.
+
+\end{abstract}
+\maketitle
+\section{Introduction}\label{sec:1}
+
+The Hodge conjecture for Fermat varieties admits an unusually explicit
+arithmetic formulation. Primitive cohomology decomposes into one-dimensional
+eigenspaces for the diagonal automorphism group \(G_m\). A character line
+\(V_m(A)\) has Hodge type \((2,2)\) precisely when \(A\) has age three;
+the full rational block \(V_m[A]_{\mathbf Q}\) has this type precisely when
+every unit translate of \(A\) has age three. What is difficult is not
+detecting Hodge classes but
+realizing every rational Galois block by algebraic cycles. Decomposable
+characters are controlled by lower-dimensional Fermat varieties, while
+standard characters are represented by Aoki's cycles. Composite conductors
+also contain nonstandard characters for which neither construction applies
+directly.
+
+Let \(e_{[A]}\in\mathbf Q[G_m]\) be the rational projector onto
+\(V_m[A]_{\mathbf Q}\). If a rational-coefficient algebraic cycle \(Z\)
+has nonzero projection onto \(V_m(A)\), then
+\(w=e_{[A]}\operatorname{cl}(Z)\) is a nonzero rational vector in
+\(V_m[A]_{\mathbf Q}\). Since this block is a multiplicity-one irreducible
+rational representation, \(\mathbf Q[G_m]w=V_m[A]_{\mathbf Q}\).
+The projector and deck translates are algebraic correspondences, so they
+give algebraic generators of the whole block, as explained in Section 3.
+
+Our result is the following.
+
+\begin{theorem}\label{theorem:1.1}
+
+For every odd integer \(m\ge3\), the cycle class map
+\[
+\operatorname{cl}\colon CH^2(X_m^4)_{\mathbf Q}\longrightarrow
+H^4(X_m^4,\mathbf Q)\cap H^{2,2}(X_m^4)
+\]
+is surjective.
+
+Consequently every odd-degree Fermat fourfold satisfies the rational Hodge
+conjecture in all codimensions.
+\end{theorem}
+
+The last assertion follows because codimensions zero and four are immediate,
+codimension one is the Lefschetz \((1,1)\) theorem, and codimension three follows
+from hard Lefschetz applied to divisor classes. Thus codimension two is the only
+substantive case.
+
+\subsection{Relation to earlier work}\label{sec:1.1}
+
+Shioda \cite{shioda1979}, Shioda--Katsura \cite[Theorem 1.7, pp.~101--102]{shiodakatsura1979}, Ran
+\cite[pp.~138--140]{ran1980}, and Aoki \cite[Theorem 2-1, p.~388]{aoki1987} developed the character
+calculus and the geometric correspondences used to construct large classes of
+cycles on Fermat hypersurfaces. Aoki \cite[Corollary 2-3, p.~388]{aoki1987} proves the
+Hodge conjecture for Fermat varieties in every dimension whenever
+\(m=p^e\) is a prime power, with no restriction on the exponent.
+Aoki's later work \cite[Theorem 0.1, p.~177]{aoki2000} treats abelian varieties
+isogenous to factors of powers of the Fermat-curve Jacobian \(J_m\).
+The Jacobian-power conclusion is recorded in
+\cite[Theorem 1.2, p.~102]{aoki2002} for prime powers, twice prime powers, and
+\[
+m=2^a3^b5^c7^d,\qquad c=0\ \text{or}\ d=0,
+\]
+where the exponents are nonnegative. These statements concern
+Fermat-type abelian varieties and powers of \(J_m\). The relation to
+hypersurfaces is explicit in \cite[Corollary 3.2, p.~184]{aoki2000}: algebraicity
+for the Fermat hypersurfaces in all dimensions is transported to the
+Fermat-type abelian varieties. The proof of \cite[Theorem 0.1, p.~185]{aoki2000}
+first establishes that hypersurface input for the stated degree families.
+In particular, the odd families \(3^a5^b\) and \(3^a7^b\) are already
+unbounded precedents.
+
+More recently, da Silva
+\cite[Proposition 3.1, p.~4]{dasilva2021}, in the published version, proved the Hodge
+conjecture for Fermat fourfolds of degree \(m\le100\) with \((m,6)=1\).
+It explicitly states that condition \(P_{33}\) fails
+\cite[Proposition 3.4, p.~5]{dasilva2021}. Jumagulov \cite[Theorem 1.1, p.~2]{jumagulov2026} proved the result
+for every odd \(3\le m\le199\), explicitly using an exhaustive machine census
+\cite[Abstract, p.~1]{jumagulov2026}. Its Theorems 1.2--1.4 also give the split,
+two-pair standard, and level-33-to-66 closure constructions used below.
+The contribution here is the exhaustiveness of these algebraic leaves
+for arbitrary odd conductors, established by the short-support,
+correction, and ambient-completion arguments. For fourfolds this removes
+the restrictions on prime-factor patterns in the existing unbounded
+families and covers every odd degree. The present bibliographic and
+source checks were completed on 2026-09-07.
+
+Schoen \cite[Theorem 3.4, pp.~145--146]{schoen1989} proves the generalized Hodge conjecture
+for a selected Hodge substructure on certain generalized Prym varieties under
+a quasi-simple branching hypothesis. This is an important precedent for
+transferring algebraic classes from Fermat sources to cyclic-cover geometry,
+but it does not prove the Hodge conjecture for the Fermat source itself. In
+the non-quasi-simple case, \cite[Remark 3.5, p.~146]{schoen1989} instead records the Fermat
+Hodge conjecture as a sufficient input.
+
+Kang stated a stronger result: \cite[Corollary 3.2, p.~227]{kang2016} asserts the generalized
+Hodge conjecture for Fermat varieties of dimensions three and four in arbitrary
+degree. Its equation \((3.3)\) invokes the product estimate of
+\cite[Proposition 2.2(iv), pp.~521--522]{kang2015}. We retain Kang's result as a
+statement-level precedent, not an input. The proof here is independent of
+refined motivic dimension and addresses the odd-degree ordinary rational
+Hodge conjecture directly.
+
+\emph{Note on the tensor formula.} Write \(\mathcal F^pH\) for the largest
+rational sub-Hodge structure of \(H\) contained in the Hodge-filtration
+space \(F^pH_{\mathbf C}\), and put \(\mathcal F_t=\mathcal F^{-t}\)
+on homology, as in \cite[pp.~520--521]{kang2015}. Here \(H_j(X,\mathbf Q)\) is
+Borel--Moore homology and \(W_{-j}\) is its pure weight-\(-j\) part.
+The product proof \cite[p.~522]{kang2015} uses the equality
+\[
+\begin{gathered}
+\mathcal F_m W_{-i}H_i(X_1\times X_2,\mathbf Q)
+\\=\bigoplus_{j+\ell=i}\mathcal F_m
+  \bigl(W_{-j}H_j(X_1,\mathbf Q)\otimes W_{-\ell}H_\ell(X_2,\mathbf Q)\bigr)\\
+=\bigoplus_{j+\ell=i}\ \bigoplus_{t+s=m}
+  \mathcal F_tW_{-j}H_j(X_1,\mathbf Q)\otimes
+  \mathcal F_sW_{-\ell}H_\ell(X_2,\mathbf Q).
+\end{gathered}
+\]
+The second equality fails in general. For a positive-genus curve \(C\),
+put \(H=H^1(C,\mathbf Q)\). Then \(\mathcal F^1H=0\), whereas
+the Künneth component of the diagonal is a nonzero rational \((1,1)\)
+class in \(\mathcal F^1(H\otimes H)\). Thus the corresponding
+factorwise sum \(\sum_{a+b=1}\mathcal F^aH\otimes\mathcal F^bH\)
+is zero and misses that class; dually the printed equality fails in the
+\(j=\ell=m=1\) homology component. This identifies a gap in the
+product argument, without disproving either the product estimate itself
+or Kang's final Hodge-conjecture statement.
+
+\subsection{Structure of the proof}\label{sec:1.2}
+
+Let \(A=(a_0,\ldots,a_5)\) be a nonzero Fermat character modulo \(m\).
+Its rational primitive block is the full orbit of \(A\) under
+\(U_m=(\mathbf Z/m\mathbf Z)^\times\). The Hodge condition is
+\[
+\sum_{i=0}^5\langle ta_i\rangle_m=3m\qquad(t\in U_m).
+\tag{1.1}\label{eq:1.1}
+\]
+An inverse pair leaves a Hodge quadruple and is realized by a
+Fermat-surface divisor, a join, and inverse-pair contraction. We may
+therefore assume that \(A\) is inverse-pair-free.
+
+The proof uses three arithmetic steps.
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*]\tightlist
+\item Exact-order Fourier rows and the sharp signed ledger isolate maximal
+active orders. The vector-valued terminal-kernel classification of
+Section 2 and the small matrices of Section 6 retain the actual
+parity and equality cases.
+\item Theorem 7.1 resolves every active order divisible by nine, allowing
+arbitrary five-depth. Theorem 7.3 then resolves every active order
+divisible by twenty-five by an explicit correction estimate.
+Corollary 7.4 either gives a same-degree algebraic certificate or
+removes common content, reducing both small-prime exponents to at
+most one.
+\item At a maximal large part, Theorem 7.5 completes the ambient one-small
+faces with energies four, five, or six. The mixed base is treated
+by the four-face system of Section 8 and its zero-top branch in
+Section 10. The finite endpoints and their geometry are given in
+Section 9. Every omitted-factor row is used only after the ledger
+is exhausted or an actual ambient completion has been obtained.
+\end{enumerate}
+
+Same-degree surface completion in Lemma 3.3 allows the complementary
+surface to remain at degree \(m\). Every leaf has an actual Chow
+certificate, and every change of degree is transported by the finite
+power-map identity \eqref{eq:2}. Section 10 assembles the proof without further
+normal-form or uniqueness assumptions.
+
+\subsection{Machine-checked finite certificates}\label{sec:1.3}
+
+The accompanying Lean 4 sources (Lean 4.32.0, Mathlib) concern finite
+integer predicates: the cyclic additive matrices of Appendix A, the
+pure one-small exception levels of Appendix B, and the explicit
+level-66 identities used in Section 9.2. In particular,
+\(\texttt{Mixed35Direct.essential\_energy}\) verifies the
+augmented-energy bound for the enumerated essential representatives;
+the pure-small certificates identify the complete canonical sets at
+levels 21, 33, and 39, and the level-66 certificates check the Hodge
+rows and occurrence identities of the exceptional bridge. The Lean
+sources, Python comparison scripts, and axiom reports are supplied in
+the \(\texttt{certificates/}\) directory. The certificate proofs use
+the standard Lean axioms \(\texttt{propext}\),
+\(\texttt{Classical.choice}\), and \(\texttt{Quot.sound}\), without
+\(\texttt{sorry}\) or \(\texttt{native\_decide}\).
+
+Appendix A is an independent finite certificate. The essential-cross
+exclusion of Lemma 8.2 is proved analytically through row differences
+and column Fourier modes, without interpreting the augmented energy
+as actual mass. The retained finite statements do not formalize the
+new terminal definition or the infinite dependency chain.
+
+Theorems 1.1, 4.1, and 10.2, the arbitrary-conductor arguments of
+Sections 6--10, and the Chow realization are ordinary mathematical
+proofs. Neither the geometric inputs nor the passage from the unit
+equations to actual cycles is supplied as a Lean theorem. The finite
+certificates verify their stated finite objects; their success alone
+does not imply the arbitrary-conductor Hodge theorem.
+
+\section{Fermat characters and rational Hodge blocks}\label{sec:2}
+
+Let
+\[
+G_m=(\mu_m)^6/\mu_m^{\mathrm{diag}}
+\]
+act diagonally on \(X_m^4\). Write a character as
+\[
+A=(a_0,\ldots,a_5)\in (\mathbf Z/m\mathbf Z)^6,
+\qquad \sum_i a_i=0,
+\]
+with each \(a_i\ne0\). The standard Fermat character decomposition and age
+formula \cite[p.~385]{aoki1987} give
+\[
+H^4(X_m^4,\mathbf C)_{\mathrm{prim}}
+=\bigoplus_A V_m(A),
+\tag{2.1}\label{eq:2.1}
+\]
+where every nonzero summand \(V_m(A)\) is one-dimensional. If
+\(\langle a\rangle_m\in\{1,\ldots,m-1\}\) denotes the standard representative,
+then the middle-Hodge condition needed here is
+\[
+V_m(A)\subset H^{2,2}
+\quad\Longleftrightarrow\quad
+\sum_i\langle a_i\rangle_m=3m.
+\tag{2.2}\label{eq:2.2}
+\]
+
+The rational block associated with \(A\) is
+\[
+V_m[A]_{\mathbf Q}\otimes_{\mathbf Q}\mathbf C
+=\bigoplus_{t\in U_m/\operatorname{Stab}(A)}V_m(tA).
+\tag{2.3}\label{eq:2.3}
+\]
+It is a rational Hodge structure of type \((2,2)\) exactly when \eqref{eq:1.1} holds.
+
+More generally, write
+\[
+X_m^d=\{x_0^m+\cdots+x_{d+1}^m=0\}\subset\mathbf P^{d+1}.
+\]
+A Hodge tuple of even length \(L\) at level \(m\) is a multiset of
+nonzero residues satisfying
+\[
+\sum_{a\in A}\langle ta\rangle_m=Lm/2\qquad(t\in U_m).
+\tag{1}\label{eq:1}
+\]
+Its grade is \(L/2\). We write \(\operatorname{Alg}_m(A)\) for
+algebraicity of its complete rational primitive block on \(X_m^{L-2}\).
+All varieties and cycles are over \(\mathbf C\); rationality refers to
+cycle coefficients, not to fields of definition of individual subvarieties.
+
+For a subgroup \(J\) of a unit group, let \(E_J\) denote averaging under
+its multiplicative action. For \(p^e\parallel q\), put
+\[
+J_{p,e}=\begin{cases}
+U_p,&e=1,\\
+\ker(U_{p^e}\to U_{p^{e-1}}),&e>1,
+\end{cases}
+\qquad
+P_q=\prod_{p^e\parallel q}(I-E_{J_{p,e}}).
+\]
+We set \(P_1=I\). A terminal fibre is a coset of one of the groups
+\(J_{p,e}\), with every other primary coordinate fixed. The characters
+surviving \(P_q\) are precisely those of conductor \(q\).
+
+We use \(\alpha_3\) for the nonprincipal character of \(U_3\),
+normalized by \(\alpha_3(1)=1\) and \(\alpha_3(2)=-1\).
+In a small-coordinate Fourier mode, \(\alpha_5\) denotes a
+nonprincipal character of \(U_5\); the principal small character
+is written as \(1\).
+
+\begin{lemma}[centered tensor spark]\label{lemma:2.1}
+
+For finite sets \(X_i\) of sizes \(n_i\ge2\), put
+\(c_i(x)=\delta_x-n_i^{-1}\mathbf1\). The columns
+\(\bigotimes_i c_i(x_i)\) admit no nonzero relation on fewer than
+\(\min_i n_i\) distinct sites. The statement also holds for vector
+coefficients.
+
+\end{lemma}
+\begin{proof}
+
+The only relation among all centered columns of one factor is their sum.
+In a proposed relation on fewer than \(\min_i n_i\) sites, fewer than
+\(n_1\) first labels occur, so their columns are independent. Grouping by
+that label and inducting on the remaining factors proves the assertion.
+Apply linear functionals to treat vector coefficients.
+\end{proof}
+
+\begin{lemma}[twelve-site classification for large factors]\label{lemma:2.2}
+
+Let all primes dividing \(r>1\) be at least seven and let \(V\) be a
+characteristic-zero vector space. If \(0\ne h:U_r\to V\), \(P_rh=0\), and
+\(|\operatorname{supp}h|\le12\), then \(h\) is constant and nonzero on one
+complete terminal fibre, or on each of two parallel complete \(U_7\)-fibres.
+The second possibility has twelve sites and requires \(7^1\parallel r\).
+
+\end{lemma}
+\begin{proof}
+
+Work first on one product of terminal cosets, sorting its sizes
+\(n_1\le n_2\le\cdots\). With at least two factors, \(n_1\ge6\) and
+\(n_2\ge10\). Put \(P'=\prod_{i>1}(I-E_i)\). The kernel equation says that
+\(P'h_a\) is independent of the first coordinate \(a\). If one slice is
+zero, all slices are in \(\ker P'\), and each nonzero slice has at least
+\(n_2\) sites. There is at most one; induction gives a complete fibre.
+If every slice is nonzero and a singleton slice exists, the difference
+between it and any other slice has at most \(14-n_1\le8<n_2\) sites.
+Lemma 2.1 makes every slice identical to that singleton. If no singleton
+exists, \(2n_1\le12\) forces \(n_1=6\) and two sites in every slice.
+Slice differences have at most four sites and vanish, giving two parallel
+six-fibres. One factor alone has the constant kernel. Finally different
+terminal-coset blocks are preserved by \(P_r\); two nonzero blocks under
+the bound must each be a six-fibre. The only terminal group of size six
+is \(U_7\).
+\end{proof}
+
+\begin{corollary}[odd large-factor kernel]\label{corollary:2.3}
+
+A nonzero integral odd \(h\in\ker P_r\) of norm at most twelve is
+\[
+h=\epsilon(\mathbf1_{U_7\times\{z\}}-
+\mathbf1_{U_7\times\{-z\}}),
+\qquad r=7R,\quad R>1,\quad (R,7)=1,\quad\epsilon=\pm1.
+\]
+In particular its norm is twelve. A nonzero kernel with support at most
+six is a single \(U_7\)-fibre.
+
+\end{corollary}
+\begin{proof}
+
+A fibre is equal to its negative only when it has no other fixed primary
+coordinate and its varying subgroup contains \(-1\). This is precisely
+the full group \(U_p\) at a prime level; a constant there is even.
+Otherwise oddness requires the distinct negative fibre. Apply Lemma 2.2,
+then integrality and the norm bound.
+\end{proof}
+
+\begin{lemma}[a five-factor under a six-site bound]\label{lemma:2.4}
+
+On a product with one factor of size five and all other terminal sizes at
+least six, a nonzero centered-product kernel function on at most six sites
+is constant on a complete five-fibre or on a complete six-fibre. The same
+holds for vector coefficients.
+
+\end{lemma}
+\begin{proof}
+
+Group by the five-coordinate. If a slice is zero, every other slice is a
+residual kernel relation of support at least six, so there is exactly one;
+its shortest relation is a full six-fibre by the proof of Lemma 2.2.
+If all five slices are nonzero, one is a singleton and every slice
+difference has at most three sites. All slices equal that singleton by
+residual spark. The one-factor case is immediate.
+\end{proof}
+
+We will repeatedly use the following explicit detector. For \(Q=p^e\),
+\(p\ge11\), primitive characters of prescribed even parity with exponents
+\(2,4\), or prescribed odd parity with exponents \(1,3\), take distinct
+values at seven. Equality would imply \(7^2=1\pmod Q\), impossible because
+\(p\nmid48\). Both choices are primitive, including at higher depth.
+On a product of such factors, fix all but one character and use these two
+choices to avoid one specified product value at seven.
+
+\begin{lemma}[short odd total variation]\label{lemma:2.5}
+
+Let a permutation \(T\) commute with a fixed-point-free involution \(N\),
+and suppose every \(T\)-orbit has length at least three. Let \(f\) be
+integral and satisfy \(f(Nx)=-f(x)\), and set
+\[
+k=\|f\|_1,\qquad V(f)=\sum_x|f(Tx)-f(x)|.
+\]
+If \(k=2\), then \(V(f)=4\). If \(k=4\), then \(V(f)\ge4\), and equality
+means that \(f\) consists of two consecutive unit values and their negatives,
+on one negative-stable cycle or a pair of exchanged cycles. If \(k=6\) and
+\(V(f)=0\), the support is a pair of exchanged three-cycles with opposite
+constant unit values.
+
+\end{lemma}
+\begin{proof}
+
+On any cycle the variation is at least \(2(\max f-\min f)\). On a
+nonnegative cycle with zeros and maximum \(a>0\) it is at least \(2a\).
+Variations add over cycles. A negative-stable cycle has even length and
+\(N\) acts by its half-period; a nonzero odd function on it has both signs
+and variation at least four. Exchanged cycles have equal norms and variations.
+
+For \(k=2\), \(f\) is a single unit antipodal delta. Its two sites and their
+translates are distinct, since \(Tx=\pm x\) would give an orbit of length
+at most two. Hence the variation is four. For \(k=4\), twice a single
+antipodal delta has variation eight. Otherwise the positive and negative
+parts each have two unit entries. An exchanged pair has norm two on each
+cycle; because its length is at least three, variation two is possible
+only when the two entries have one sign and form a single consecutive
+plateau. Any second pair contributes at least four more variation. On a
+negative-stable cycle, variation four permits just one positive and one
+negative plateau: an additional positive or negative run would add two
+transitions. The two plateaux are interchanged by \(N\), so their two
+sites are consecutive. This proves the equality classification. Finally,
+zero variation means constancy on every cycle. Oddness forces zero on
+negative-stable cycles. An exchanged pair of nonzero cycles costs
+\(2\ell|a|\) with \(\ell\ge3\), so total norm six forces \(\ell=3\) and
+\(|a|=1\).
+\end{proof}
+
+The characterwise form of Theorem 1.1 is the following.
+
+\begin{proposition}\label{proposition:2.6}
+
+If \(A\) is a nonzero length-six character modulo an odd integer \(m\) and
+\[
+\sum_i\langle ta_i\rangle_m=3m
+\qquad(t\in U_m),
+\]
+then the complete rational block \(V_m[A]_{\mathbf Q}\) is generated by
+codimension-two algebraic cycles on \(X_m^4\).
+
+\end{proposition}
+
+\section{The typed Chow calculus}\label{sec:3}
+
+We use character operations only together with their geometric source, target,
+codimension, and field of definition. The classical inputs are the
+Lefschetz \((1,1)\) theorem, Ran's algebraic join and its primitive
+injectivity, Aoki's join and inverse-pair contraction, and Aoki's
+standard-five cycles. The rational block is always the complete unit orbit.
+
+\begin{lemma}[join, contraction, and finite descent]\label{lemma:3.1}
+
+Let \(T_i\) be middle Fermat characters of length \(2d_i\) and grade \(d_i\).
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*]\tightlist
+\item If the rational blocks of \(T_1\) and \(T_2\) are algebraic, then the block
+of their ordered juxtaposition \(T_1*T_2\) is algebraic on
+\(X_m^{2(d_1+d_2)-2}\). The induced correspondence adds one Tate factor.
+\item If \(\delta=(u,-u)\) is a nonzero inverse pair and the block of
+\(T*\delta\) is algebraic, then the block of \(T\) is algebraic. Repeated
+inverse pairs may be contracted successively.
+\item If \(n\mid m\), \(c=m/n\), and \(T=cT_0\) has length \(2d\), then
+algebraicity of the block of \(T_0\) on \(X_n^{2d-2}\) is equivalent
+to algebraicity of the block of \(T\) on \(X_m^{2d-2}\).
+\end{enumerate}
+
+\end{lemma}
+\begin{proof}
+
+Ran's joining-line incidence correspondence gives the first implication:
+\cite[Proposition 4.6 and Corollary 4.7, p.~140]{ran1980} give injectivity on primitive
+homology and identify its action on character lines with ordered
+juxtaposition. The second implication follows directly from Aoki
+\cite[Theorem 1-4(ii), p.~388]{aoki1987}, applied with the nonnegative even parameter
+\(s=0\) and the nonzero inverse-pair character \(\delta\). Thus the
+length-two contraction is included in the stated classical theorem.
+Ran's proof also starts with two zero-dimensional Fermat hypersurfaces.
+
+For the third assertion use
+\[
+\pi_c\colon X_m^{2d-2}\longrightarrow X_n^{2d-2},
+\qquad [z_i]\longmapsto[z_i^c].
+\]
+Then
+\[
+\pi_c^*V_n(T_0)=V_m(cT_0),
+\qquad \pi_{c,*}\pi_c^*=c^{2d-1}\operatorname{id}.
+\]
+The map has degree \(c^{2d-1}\). Its quotient group acts trivially on
+the block of \(cT_0\), so \(\pi_c^*\pi_{c,*}\) is also that nonzero
+scalar on this block. Hence
+\[
+\operatorname{Alg}_m(cT_0)\quad\Longleftrightarrow\quad
+\operatorname{Alg}_n(T_0).
+\tag{2}\label{eq:2}
+\]
+Surjective unit reduction makes both maps compatible with the complete
+rational orbit.
+\end{proof}
+
+The rational group-algebra projector onto a unit orbit is an algebraic
+rational linear combination of deck correspondences. A nonzero rational
+vector in this multiplicity-one rational irreducible representation
+generates it under the deck group. Thus a cycle with nonzero projection
+on one complex character line supplies the entire rational block after
+rational projection and deck translates. No averaging over arithmetic
+Galois conjugates is required to assert nonvanishing.
+
+\begin{lemma}[standard packets]\label{lemma:3.2}
+
+Let \(m=5d\) be odd with \(d>1\), put \(p=5\), and let \(S_p(a)\) be the length-six Fermat character
+\[
+S_p(a)=(a,a+d,\ldots,a+(p-1)d,-pa),
+\qquad a\not\equiv0\pmod d.
+\]
+The rational block of \(S_p(a)\) is algebraic. This includes nonprimitive
+parameters: with \(g=\gcd(a,d)\), the tuple is the common-content
+inflation by \(g\) of the primitive-parameter standard tuple at degree
+\(m/g=5(d/g)\).
+
+\end{lemma}
+\begin{proof}
+
+This is Aoki's standard cycle \cite[Theorem 2-1, p.~388]{aoki1987}. The standard
+element range is \(d/\gcd(a,d)>2\) \cite[p.~387]{aoki1987}, and the construction
+assumes \(\gcd(a,d)=1\). For a nonprimitive parameter with
+\(a\not\equiv0\pmod d\), divide \(g=\gcd(a,d)\). The reduced
+\(d/g\) is odd and greater than one, hence at least three. Apply Aoki's
+theorem there and return by \eqref{eq:2}.
+\end{proof}
+
+\begin{lemma}[two same-degree completion rules]\label{lemma:3.3}
+
+Let \(A\) be a Hodge sextuple, and write
+\[
+L_p(c)=\{c+jm/p:0\le j<p\}\pmod m.
+\]
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*]\tightlist
+\item If \(3\mid m\), \(c\not\equiv0\pmod{m/3}\), and
+\(A=L_3(c)\uplus R\), then \(\operatorname{Alg}_m(A)\) holds.
+\item If \(5\mid m\), \(c\not\equiv0\pmod{m/5}\), \(d\in L_5(c)\), and
+\(A=(L_5(c)\setminus\{d\})\uplus\{y,z\}\), then
+\(\operatorname{Alg}_m(A)\) holds. No divisibility of \(y,z\) is assumed.
+\end{enumerate}
+
+The second rule gives a uniform fibre criterion for the two-pair standard
+closure of Jumagulov \cite[Theorem 1.3, p.~4]{jumagulov2026}: the two pairs and the
+standard sextuple plus surface quadruple are exactly those in \eqref{eq:5}.
+The criterion places the complementary surface at the ambient degree.
+The new exhaustiveness arguments below determine when these established
+geometric closures must occur at an arbitrary odd conductor.
+
+\end{lemma}
+\begin{proof}
+
+The elementary fibre identity is
+\[
+\sum_{x\in L_p(c)}\langle tx\rangle_m
+=\frac{p-1}{2}m+\langle ptc\rangle_m.
+\tag{3}\label{eq:3}
+\]
+It follows by reducing to the \(p\) equally spaced lifts of \(tc\) modulo
+\(m/p\). For the first assertion put
+\[
+S=L_3(c)\uplus\{-3c\},\qquad B=R\uplus\{3c\}.
+\]
+Both are nonzero Hodge quadruples by \eqref{eq:3} and \eqref{eq:1}. The literal identity
+\[
+A\uplus(3c,-3c)=S\uplus B
+\tag{4}\label{eq:4}
+\]
+proves the claim by joining their surface divisor classes and contracting
+the displayed pair. The join first reaches codimension three on \(X_m^6\);
+the contraction returns to codimension two on \(X_m^4\). For the second
+assertion set
+\[
+S=L_5(c)\uplus\{-5c\},\qquad B=(5c,y,z,-d).
+\]
+Here \(S\) is standard-five, while \eqref{eq:1} and \eqref{eq:3} give grade two for \(B\).
+All entries are nonzero, and
+\[
+A\uplus(d,-d)\uplus(5c,-5c)=S\uplus B.
+\tag{5}\label{eq:5}
+\]
+Join the standard cycle and the divisor to codimension four on \(X_m^8\),
+then contract twice to codimension two on \(X_m^4\). If \(c\) is not
+primitive, divide \(\gcd(c,m/5)\) before applying Aoki and use \eqref{eq:2} to
+return. The hypothesis \(c\not\equiv0\pmod{m/5}\) makes the reduced
+standard block nonzero.
+\end{proof}
+
+\begin{remark}[same-degree terminal certificates]\label{remark:3.4}
+
+The surface \(B\) in either rule is at the same level \(m\). The terminal
+condition in Section 4 therefore allows these actual surface/standard
+join-and-contraction certificates at degree \(m\), without requiring the
+surface factor to be inflated from \(m/3\) or \(m/5\). No divisibility
+condition on the complementary entries is part of either completion rule.
+\end{remark}
+
+\section{The conductor-uniform classification}\label{sec:4}
+
+Call a Hodge sextuple \emph{decomposable} if it contains an inverse pair.
+A nondecomposable sextuple is called \emph{terminal} when it has one of the
+following actual Chow certificates: joins of same-degree Fermat-surface
+divisor blocks followed by inverse-pair contractions; an Aoki
+standard-five block, optionally joined with a same-degree surface divisor
+and contracted; a split block obtained from a divisor on a product of
+Fermat curves with complementary character types; or the exceptional
+level-33 construction of Section 9.2. The definition includes unit and
+permutation translates and finite power-map transports of these
+certificates. In particular, both completion rules of Lemma 3.3 are
+terminal certificates at degree \(m\); no prior inflation of their
+surface factor from \(m/3\) or \(m/5\) is required.
+
+\begin{theorem}[descent or packet]\label{theorem:4.1}
+
+Let \(m\ge3\) be odd and let \(A\) be a nonzero length-six character satisfying
+the unit equations \eqref{eq:1.1}. Then one of the following holds.
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*]\tightlist
+\item \(A\) is decomposable;
+\item \(A\) is terminal;
+\item there exist a proper divisor \(n\mid m\), \(c=m/n>1\), and a Hodge sextuple
+\(A_0\) modulo \(n\) such that \(A=cA_0\).
+\end{enumerate}
+
+Every terminal case in the second alternative has an actual Chow realization. In particular, the
+alternatives are stable under passage to the complete rational unit orbit.
+\end{theorem}
+
+The proof of Theorem 4.1 is given in Section 10 after the high-depth,
+ambient one-small, and mixed-base arguments. Proposition 5.2 records
+the well-founded degree changes. Assuming the classification for the
+moment, the main theorem follows.
+
+\begin{proof}[Proof of Theorem 1.1 from Theorem 4.1]
+
+Apply Theorem 4.1 to a rational Hodge block. A decomposable character is
+algebraic by Lemma 3.1 and the Lefschetz \((1,1)\) theorem on the Fermat-surface
+factor. A terminal character is algebraic by Lemmas 3.1--3.3 and the explicit
+packet constructions. In the remaining case, the finite power-map identity \eqref{eq:2} reduces the claim to
+a proper divisor of the conductor. Strong induction on \(m\) proves
+Proposition 2.6 and hence the surjectivity of the primitive cycle class map.
+The nonprimitive part of \(H^4\) is generated by the square of the hyperplane
+class.
+\end{proof}
+
+\section{Exhaustive branch structure and termination}\label{sec:5}
+
+The conductor bookkeeping separates the arithmetic arguments while
+retaining the full ambient Hodge sextuple. Maximality isolates rows
+whose conductor contains the selected large part; actual completion
+or a sharp ledger equality controls the other supports.
+
+\begin{proposition}[branch coverage]\label{proposition:5.1}
+
+Every odd conductor \(m\ge3\) belongs to exactly one of the following
+regimes.
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*]\tightlist
+\item If \(15\nmid m\), either all prime divisors are at least seven,
+or a unique \(s\in\{3,5\}\) divides \(m\). In the latter case
+\[
+m=s^eM,\qquad(M,s)=1,\qquad p\ge7\text{ for every }p\mid M.
+\tag{5.1}\label{eq:5.1}
+\]
+The possibilities \(M=1,e=1\), \(M=1,e\ge2\),
+\(M>1,e=1\), and \(M>1,e\ge2\) are disjoint and exhaustive.
+\item If \(15\mid m\), then uniquely
+\[
+m=3^a5^bM,\qquad a,b\ge1,\qquad(M,15)=1.
+\tag{5.2}\label{eq:5.2}
+\]
+The cases \((a,b)=(1,1)\), \(a\ge2,b=1\),
+\(a=1,b\ge2\), and \(a,b\ge2\) are disjoint and exhaustive.
+\end{enumerate}
+
+\end{proposition}
+\begin{proof}
+
+This is unique factorization, with three and five distinguished.
+Theorem 7.1 applies to active three-depth at least two in any of these
+regimes, and Theorem 7.3 subsequently handles active five-depth at
+least two. The partition introduces no compatibility assumption
+between two primary walls.
+\end{proof}
+
+\begin{proposition}[well-founded descent]\label{proposition:5.2}
+
+Every nonterminal change of degree used in Theorem 4.1 removes a common
+content \(c>1\) and therefore strictly lowers the positive conductor.
+In particular, for \(m=3^a5^bM\), Corollary 7.4 reduces to
+\[
+3^{\min(a,1)}5^{\min(b,1)}M
+\tag{5.3}\label{eq:5.3}
+\]
+unless a same-degree leaf has already been obtained. At a reduced
+level, if no nontrivial large part is active, all entries descend to
+degree three, five, or fifteen. Any such passage from a larger degree
+is again strict. Consequently no reduction cycle exists.
+
+\end{proposition}
+\begin{proof}
+
+If \(A=cA_0\) and \(c>1\), then \(m/c<m\). Surjective unit reduction
+preserves the Hodge equations, and \eqref{eq:2} transports algebraicity in both
+directions. The positive integers are well ordered.
+\end{proof}
+
+\begin{proposition}[maximal rows and incomparable supports]\label{proposition:5.3}
+
+At a level with three- and five-adic exponents at most one, choose a
+divisibility-maximal active large part \(r\). A Fourier row with large
+conductor \(r\) receives contributions only from large parts divisible
+by \(r\). Maximality removes proper multiples, but does not itself
+remove incomparable supports.
+
+The local classification gives a contradiction, an actual terminal
+certificate, or a grade-two core whose two ambient complements form
+an inverse pair. In the one-small sector, energy four gives that
+core, energy five gives the forced level-33 completion, and energy
+six exhausts the sextuple. Thus globalization follows from actual
+completion or ledger exhaustion.
+
+\end{proposition}
+\begin{proof}
+
+Equation \eqref{eq:7} proves the restriction on contributing orders. Theorem
+7.5 proves the ambient one-small completions. Lemmas 8.1--8.4 resolve
+the nonzero mixed face, and Section 10 treats the two-small and empty
+sectors. Each use of an omitted-factor row there follows an explicit
+twelve-unit equality; the lower-energy cases instead complete the
+actual Hodge tuple before excluding external supports.
+\end{proof}
+
+\section{Exact-order Fourier rows and small matrices}\label{sec:6}
+
+An inverse pair in a Hodge sextuple leaves a Hodge quadruple, so that case
+is algebraic by Section 3. We henceforth assume inverse-pair-freeness.
+For an exact order \(q\mid m\), define
+\[
+\mu_q(x)=\#\{a\in A:a=(m/q)x\},\qquad
+F_q(x)=\mu_q(x)-\mu_q(-x),\qquad x\in U_q.
+\]
+At odd \(m\) the sharp ledger is
+\[
+F_q(-x)=-F_q(x),\qquad
+\sum_{q\mid m,\ q>1}\|F_q\|_1=12.
+\tag{6}\label{eq:6}
+\]
+Signed vanishing implies actual emptiness, because an inverse pair is
+forbidden. Use the nonconjugate Fourier convention
+\[
+\widehat f(\chi)=\sum_x f(x)\chi(x),\qquad
+B_q(x)=\langle x\rangle_q/q-\tfrac12,\qquad
+C_q(\chi)=\sum_{x\in U_q}B_q(x)\chi(x).
+\]
+Then \(T_sf(y)=f(sy)\) has multiplier \(\overline{\chi(s)}\); in
+particular its support is the inverse image under multiplication by \(s\).
+If \(\chi\) is a primitive odd character of conductor \(f\), the
+standard Dirichlet identities give
+\[
+C_f(\chi)=-L(0,\chi)\ne0.
+\]
+Indeed \(L(0,\chi)=-i\tau(\chi)L(1,\bar\chi)/\pi\), with
+\(L(1,\bar\chi)\ne0\) and \(|\tau(\chi)|^2=f\); see
+\cite[equations 25.15.5, 25.15.9, 25.15.10, and 27.10.11]{dlmf}. The exact-order
+equation is
+\[
+\sum_{f\mid q\mid m}\frac{C_q(\bar\chi)}{\varphi(q)}
+\widehat F_q(\chi)=0.
+\tag{7}\label{eq:7}
+\]
+To derive it, rewrite \eqref{eq:1} as \(\sum_{q,x}F_q(x)B_q(tx)=0\), and take
+its normalized Fourier coefficient against \(\bar\chi(t)\). An
+order-\(q\) term vanishes unless \(f\mid q\); otherwise the substitution
+\(u=tx\) gives \(\chi(x)C_q(\bar\chi)/\varphi(q)\). Unit reduction to
+any divisor is surjective. For \(p\nmid f\), induction of a nonprincipal
+character satisfies
+\[
+C_{pf}(\chi)=(1-\chi(p))C_f(\chi).
+\tag{8}\label{eq:8}
+\]
+This follows by subtracting the multiples of \(p\) from
+\(\sum_{a=1}^{pf}a\chi(a)\) and dividing by \(pf\); the sum of
+\(\chi\) over a period is zero. Thus at a maximal active exact order,
+\eqref{eq:7} and oddness give \(P_qF_q=0\). A row only sees orders divisible by
+its conductor. Incomparable supports are not discarded until a ledger
+equality proves their emptiness or an actual ambient completion resolves
+the sextuple.
+
+\begin{lemma}[small matrix classification]\label{lemma:6.1}
+
+An integral additive \(3\times4\) matrix of norm at most six consists of
+complete three-columns, a complete four-row, an essential mass-five matrix,
+or an essential mass-six matrix. For \(3\times5\), the alternatives are
+complete three-columns, a complete five-row, or an essential mass-six
+matrix. In the latter cases the signed coefficient sums are respectively
+\(\pm1,\pm2\) for \(3\times4\), and \(\pm2\) for \(3\times5\).
+An integral additive \(2\times5\) matrix of norm at most six is
+row-invariant of even mass, or has mass five with exactly one unit entry
+per column.
+
+\end{lemma}
+\begin{proof}
+
+Write entries as \(u_i+v_j\), choosing integer potentials. In the
+three-row case the norm of each column is at least \(\max u_i-\min u_i\),
+so with four or five columns that integral range is at most one. Range
+zero gives complete three-columns. Otherwise, up to a gauge, row
+permutation, and overall sign, use \(u=(1,0,0)\). A column is
+\((t+1,t,t)\). The norm bound permits only \(t=0,-1\), since any other
+column has cost at least four, making the total at least seven with four
+columns. With \(n\) columns and \(b\) columns of the second kind, the
+mass is \(n+b\). Thus \(b\le2\) for \(n=4\) and \(b\le1\) for
+\(n=5\). The coefficient sums follow at once: \(3-2=1\),
+\(2-4=-2\), and \(4-2=2\). A row-invariant matrix of mass six may
+contain a three-column with multiplicity two, which is not omitted.
+For two rows, the row difference \(d\) has \(5|d|\le6\). If \(d=0\),
+the mass is even. If \(d=\pm1\), each column has odd norm, so the total
+is odd and at least five; under the bound it equals five, with one unit
+entry in every column.
+\end{proof}
+
+\begin{lemma}[residual boundary with row-lift freedom]\label{lemma:6.2}
+
+Let a signed multiplicity restricted to an oriented terminal block have
+norm at most six, and suppose its small centered projector followed by the
+large residual projector vanishes. Either every residual slice satisfies
+the small kernel equation, or all six sites form a residual \(U_7\)-fibre
+and the projected small coefficient vector is constant on that fibre.
+If all small factor sizes are at least three, all small labels and signed
+coefficients are constant. For small sizes \(2,5\), the five-label is
+fixed and the quantity \(\sigma\alpha_3(a)\) is constant; the two-row
+label \(a\) itself need not be fixed.
+
+\end{lemma}
+\begin{proof}
+
+If there is no residual factor, its projector is the identity and the
+small equation holds immediately. Otherwise apply the residual projector
+to the vector-valued small projection. Fewer than six residual sites give
+zero by Lemma 2.1; exactly six give a constant-vector complete
+\(U_7\)-fibre. Equality in the original integral norm leaves one unit
+coefficient at each site. Centered delta columns for a set of size at
+least three are pairwise nonproportional. Equality of nonzero simple
+tensors consequently fixes all labels and coefficients in that case.
+On a two-set the two centered columns are negatives; multiplying by its
+nontrivial character records precisely that sign freedom. This gives the
+stated \(2,5\) alternative rather than an unjustified fixed-row assertion.
+\end{proof}
+
+\section{High primary depth and ambient one-small completion}\label{sec:7}
+
+\subsection{Direct high-three closure}\label{sec:7.1}
+
+\begin{theorem}[any active three-depth at least two is algebraic]\label{theorem:7.1}
+
+Let \(m\) be odd and \(A\) an inverse-pair-free Hodge sextuple. If some
+entry has exact additive order divisible by nine, then \(A\) contains a
+complete three-fibre, a standard-five sextuple, or four members of a
+nonzero five-fibre. In particular \(\operatorname{Alg}_m(A)\) follows
+from Lemma 3.3 and Aoki's standard cycle.
+
+\end{theorem}
+\begin{proof}
+
+Choose a divisibility-maximal active order \(q\) divisible by nine.
+Every active proper multiple would again be divisible by nine, so its
+primitive row is isolated. Write \(q=3^i5^jr\), where \(i\ge2\) and
+\((r,15)=1\); \(j\) may be zero. The terminal three-kernel has size
+three and odd order, so a terminal block and its negative are disjoint.
+Each oriented block has integral norm at most six.
+
+Apply Lemma 6.2. A residual boundary exhausts all six physical entries,
+fixes their three-primary label up to a common sign, and forces all
+entries to have exact order \(q\). Divide the common content \(m/q\).
+Modulo \(3^i\) their sum is \(\pm6z\), with \(z\) a unit. This is
+nonzero because \(i\ge2\). Thus no such boundary occurs.
+
+All residual slices therefore satisfy the small equation. If \(j=0\),
+a nonzero slice is constant on a three-fibre. If \(j=1\), use the
+\(3\times4\) case of Lemma 6.1; if \(j\ge2\), use \(3\times5\).
+A complete signed three-column gives an actual complete three-fibre
+(choose its positive or negative orientation), and is algebraic by
+Lemma 3.3. A five-row at depth \(j\ge2\) gives five actual members of
+\(L_5(c)\); the sixth is \(-5c\) by the zero-sum congruence. A four-row
+when \(j=1\) gives four actual members of \(L_5(c)\) and is covered by
+the same-degree completion rule, regardless of its two complements.
+
+An essential mass-six slice exhausts the ledger. All its three-primary
+labels are congruent to one unit modulo three, but its signed coefficient
+sum is \(\pm2\). The six actual entries, after dividing common content,
+therefore have nonzero sum modulo three, a contradiction.
+
+Only the essential mass-five \(3\times4\) slice remains. Its five
+effective labels have sum \(S\) that is a unit modulo every prime dividing
+\(q\). At three the coefficient sum is \(\pm1\). At five, if \(b_0\)
+is the exceptional column, the weighted sum is \(\pm3b_0\). At each
+residual prime the common label is multiplied by \(\pm1\). Hence the
+sixth actual entry is \(-(m/q)S\) and also has order \(q\). Reapply the
+just-established six-mass classification to this full stratum. If the
+sixth entry lay in a new independent small slice, that slice would contain
+only one unit entry, contrary to the minimum-support bound for the
+centered-product kernel in Lemma 2.1. A
+three-fibre or incomplete five-fibre is an algebraic leaf; the essential
+six-mass or residual boundary is impossible. Thus every alternative gives
+an asserted leaf or contradiction.
+\end{proof}
+
+\begin{corollary}\label{corollary:7.2}
+
+Unless \(A\) is already algebraic by one of these explicit certificates,
+every active order has three-adic valuation at most one. Hence, if
+\(3^a\parallel m\), all coordinates are divisible by
+\(3^{\max(a-1,0)}\).
+\end{corollary}
+
+This conclusion allows arbitrarily large ambient five-depth. It eliminates
+every active high-three order before the high-five argument is applied.
+
+\subsection{High-five closure and the correction estimate}\label{sec:7.2}
+
+\begin{theorem}[high-five closure after high-three removal]\label{theorem:7.3}
+
+Let \(m\) be odd and let \(A\) be an inverse-pair-free Hodge sextuple
+with no active order divisible by nine. If some active order is divisible
+by twenty-five, then \(\operatorname{Alg}_m(A)\) has a standard-five or
+surface-join-contraction certificate.
+
+\end{theorem}
+\begin{proof}
+
+Choose a maximal active base \(h=q/3^{v_3(q)}\) among orders divisible
+by twenty-five. Write \(h=5^jr\), \(j\ge2\), \((r,15)=1\). Only the
+orders \(h\) and \(3h\) can contribute to a conductor-\(h\) row. Set
+\(D=F_h\) and \(F=F_{3h}\), defining the latter to be zero if
+\(3h\nmid m\). If \(F\ne0\), its primitive row gives the
+\(U_3\times J_5\) small equation with the residual projector.
+
+First eliminate the residual boundary in Lemma 6.2. It uses all six
+entries. Let \(\eta_3\) be the odd character of \(U_3\), choose a
+primitive even character \(\theta\) at five-depth \(j\), and primitive
+even characters on every other remaining primary factor. Twisting
+\(\theta\) by the quadratic character modulo five preserves both
+evenness and full depth, and changes its value at seven by \(-1\).
+Thus one of the two resulting odd characters of conductor \(3h/7\) has
+a nonzero omitted-seven Euler factor. Its coefficient of \(F\) is
+nonzero: on the positive fibre the product \(\sigma\eta_3(a)\) is fixed
+by Lemma 6.2, and the negative fibre gives the same contribution. The
+isolated row \eqref{eq:7} contradicts this.
+
+Now Lemma 6.1 applies on every small slice. A complete five-row is a
+standard-five leaf. An essential mass-five slice has five actual effective
+labels whose sum is a unit at every primary factor: its three-coordinate
+weighted sum is \(\pm5u\), and its signed coefficient sum on the five
+and residual factors is \(\pm1\) or \(\pm3\). The sixth entry therefore
+has the same exact order \(3h\). A six-mass additive \(2\times5\) slice
+is row-invariant; another noninvariant slice would already cost five, and
+a separate nonzero slice costs at least two. Thus, after the standard
+leaves and contradictions, the entire top face is
+\[
+F(a,y)=v(y),\qquad v(-y)=-v(y),\qquad k=\|v\|_1\in\{2,4,6\}.
+\]
+Its full signed norm is \(2k\). The edge row gives
+\[
+PC=0,\qquad C=D-(T_3v-v),\qquad
+P=(I-E_{J_5})\prod_{p^e\parallel r}(I-E_{J_{p,e}}).
+\tag{9}\label{eq:9}
+\]
+We now prove \(C=0\) by a norm estimate.
+
+Put \(g=T_3v-v\). The ledger gives \(\|D\|_1\le12-2k\) and
+\(\|g\|_1\le2k\), so \(\|C\|_1\le12\). All terminal blocks are
+exchanged in pairs under negation because \(J_5\) has odd order. On an
+oriented half, \(C\) has norm at most six. Lemma 2.4, integrality, and
+the budget show that a nonzero correction must have the exact form
+\[
+C=\epsilon(\mathbf1_L-\mathbf1_{-L}),\qquad
+\epsilon=\pm1,\qquad |L|=\rho\in\{5,6\}.
+\tag{10}\label{eq:10}
+\]
+There is just one such antipodal block pair. A six-fibre is in an
+exponent-one \(U_7\)-direction. In either case \(L\) has a fixed nonzero
+five-primary residue \(z\) modulo \(5^{j-1}\).
+
+Let \(\Lambda=L\cup(-L)\). A source pair \(\{x,-x\}\) of \(v\)
+contributes to \(g\) at \(x,-x,x/3,-x/3\). At most one of its two
+antipodal pairs can lie in \(\Lambda\), since otherwise
+\(3z=\pm z\pmod{5^{j-1}}\). Consequently
+\[
+\|g|_\Lambda\|_1\le k,\qquad
+\|D\|_1=\|C+g\|_1\ge2\rho-k.
+\tag{11}\label{eq:11}
+\]
+For \(\rho=6\), this contradicts \(\|D\|_1\le12-2k\) for every
+\(k>0\). For \(\rho=5\) it contradicts that bound when \(k\ge4\).
+When \(\rho=5,k=2\), \(v\) is a single unit antipodal delta. If
+\(g\) meets \(\Lambda\), its other antipodal pair lies outside
+\(\Lambda\) and contributes two unavoidable units. Hence
+\(\|D\|_1\ge10-2+2=10>8\); if there is no meeting the bound is even
+larger. This excludes \eqref{eq:10} and proves \(C=0\).
+
+Thus
+\[
+D=T_3v-v,\qquad k+\tfrac12\|T_3v-v\|_1\le6.
+\tag{12}\label{eq:12}
+\]
+Every multiplication-by-three orbit in \(U_h\) has length at least
+twenty, since \(5^j\mid h\): the order at five is four, and
+\(v_5(3^4-1)=1\) gives \(\operatorname{ord}_{5^j}(3)=4\cdot5^{j-1}\)
+by binomial lifting. These are point orbits in \(U_h\). For \(k=2\),
+\(v=\pm(\delta_c-\delta_{-c})\) and the variation is four. The two top
+atoms and two forced lower atoms form a Hodge quadruple; the other two
+entries have grade one and are opposite. For \(k=4\), Lemma 2.5 gives
+variation at least four; equality is forced. On exchanged orbits, norm
+two and variation two on one orbit give two adjacent unit values; on a
+negative-stable orbit the same follows from its positive and negative
+plateaux. Therefore, up to translation and sign,
+\[
+v=\delta_c+\delta_{3c}-\delta_{-c}-\delta_{-3c}.
+\]
+For precision about the actual labels, put \(d=m/(3h)\) and let \(P_c\)
+be the two unit lifts of \(c\in U_h\) to level \(3h\), multiplied by
+\(d\). Then
+\[
+S_c=P_c\uplus\{3d(c/3),-3dc\}=L_3(dc)\uplus\{-3dc\}
+\]
+is a Hodge quadruple. The two \(S\)-blocks satisfy
+\[
+S_c\uplus S_{3c}=A\uplus(3dc,-3dc).
+\]
+This realizes the six-entry equality. For \(k=6\) the variation is zero;
+an odd invariant function vanishes on negative-stable orbits, and a
+nonzero pair of exchanged orbits would have norm at least forty. Hence
+this case is impossible.
+
+It remains to justify the case \(F=0\). Then \(PD=0\). An oriented
+nonzero block has at most six units, so Lemma 2.4 gives a complete
+five-fibre (standard-five) or six \(U_7\)-points with fixed five-primary
+unit label. The latter exhausts all entries and has sum
+\(\pm6z\ne0\pmod{5^j}\) after removal of common content. Thus it is
+impossible, completing the proof.
+\end{proof}
+
+\begin{corollary}[simultaneous primary-depth reduction]\label{corollary:7.4}
+
+For odd \(m=3^a5^bM\), \((M,15)=1\), a Hodge sextuple is algebraic by
+an explicit same-level leaf certificate, or all its entries are divisible by
+\[
+c=3^{\max(a-1,0)}5^{\max(b-1,0)}.
+\]
+In the latter case \(A=cA_0\) is a Hodge sextuple at level
+\[
+m/c=3^{\min(a,1)}5^{\min(b,1)}M.
+\]
+
+\end{corollary}
+\begin{proof}
+
+Remove inverse pairs first. Theorem 7.1 eliminates any active
+nine-divisible order unless a leaf is obtained. Theorem 7.3 then does the
+same for twenty-five. The remaining valuation bounds are exactly the
+common-content assertion. Dividing preserves all unit equations by
+surjective unit reduction; use \eqref{eq:2} for algebraicity.
+\end{proof}
+
+\subsection{Ambient one-small completion}\label{sec:7.3}
+
+All primes of \(r>1\) are at least seven and \(s\in\{3,5\}\).
+Suppose at a maximal active large part only the exact-order faces
+\(sr\) and \(r\) are present. This applies both to the pure one-small
+setting and to the mixed base with its other two faces zero. Write
+\[
+F(a,y)=F_{sr}(a,y),\qquad D(y)=F_r(y),\qquad
+e=\tfrac12(\|F\|_1+\|D\|_1),\qquad F\ne0.
+\]
+The top and edge rows are isolated by maximality; rows omitting a large
+factor are not yet isolated. Formula \eqref{eq:7} proves their independence of
+the ambient modulus. In unnormalized form the common rescaling from
+level \(sr\) to \(m\) is \([m/(sr)]\varphi(m)/\varphi(sr)\).
+
+\begin{theorem}[ambient completion]\label{theorem:7.5}
+
+Under these hypotheses and the six-entry Hodge ledger, one obtains an
+actual energy-four Hodge quadruple whose complements are inverse, the
+energy-five prefix of a level-33 exceptional packet whose last entry is
+forced, or an energy-six algebraic packet exhausting all entries.
+
+\end{theorem}
+\begin{proof}
+
+First suppose \(r\) is not a prime. Apply \(\pi_s=I-E_{U_s}\) to the
+small-coordinate vector and set \(H(y)=\pi_sF(\cdot,y)\). Then
+\(P_rH=0\) and \(H(-y)=-N_sH(y)\), where \(N_s\) negates the small
+coordinate. A nonzero \(H\) under twelve units, by Lemma 2.2, must use
+two opposite \(U_7\)-fibres and exhaust \(\|F\|_1=12\). A
+self-opposite single fibre would require \(r\) prime. For \(s=3\) the
+projected coefficient \(\sigma\alpha_3(a)\) is constant along a fibre;
+for \(s=5\) the map \((\sigma,a)\mapsto\pi_5(\sigma\delta_a)\) is
+injective, so its small label and sign are constant. Choose an odd
+nontrivial \(\alpha_s\) detecting this coefficient and a primitive even
+residual character on \(r/7\) avoiding the one omitted-seven value. The
+detector following Lemma 2.4 provides it. After the ledger exhaustion
+the conductor-\(sr/7\) row has one nonzero term and nonzero Euler factor.
+Contradiction. Thus
+\[
+F(a,y)=b(y),\qquad b\text{ integral and odd}.
+\]
+The edge row gives \(P_rC=0\), where \(C=D-(T_s-1)b\). If \(s=5\),
+\(k=\|b\|_1\ge2\) and
+\[
+\|C\|_1\le12-(s-3)k\le8,
+\]
+so Corollary 2.3 forces \(C=0\). If \(s=3\), the only possible
+nonzero correction has norm twelve and is a pair of opposite
+\(U_7\)-fibres. Equality in
+\[
+\|C\|_1\le\|D\|_1+\|T_3b-b\|_1\le12-2k+2k=12
+\]
+forces \(D,T_3b-b\) to have disjoint support inside the unit-coefficient
+support of \(C\), and forces \(b,T_3b\) to have disjoint support there
+too. Both supports would have residual labels \(z,-z\) on \(r/7\),
+requiring \(3z=\pm z\). All primes of \(r/7\) are at least eleven, so
+this is impossible. Hence also \(C=0\).
+
+The energy is now
+\[
+e=\frac{s-1}{2}k+\frac12\|T_sb-b\|_1\le6.
+\tag{13}\label{eq:13}
+\]
+For \(s=5\), necessarily \(k=2\), the variation is four, and the
+complete packet is standard-five. For \(s=3\), \(k=2\) gives a
+four-entry three-standard surface block. For \(k=4\), Lemma 2.5 makes
+variation four equivalent to two consecutive unit values and their
+negatives, so \(e=6\) and the two-surface identity from the high-five
+proof applies. For \(k=6\), invariance would require
+\(\operatorname{ord}_r(3)\le3\) on a nonzero odd orbit. Orders one or
+two are impossible; order three forces \(r\mid26\), hence \(r=13\),
+contrary to the current nonprime case. This completes the nonprime
+argument.
+
+Now let \(r=p\) be prime. The exact top kernel gives, in the zero-mean
+gauge,
+\[
+F(a,y)=u(y)+b(a),\qquad u(-y)=-u(y),\qquad b(-a)=-b(a).
+\tag{14}\label{eq:14}
+\]
+Integrality makes the potentials either both integral or both strict
+half-integral: all differences within each potential are integral and
+oddness forces twice the common fractional part to be integral. The edge
+equation gives
+\[
+D=T_su-u
+\]
+exactly, since the only \(P_p\)-kernel is constant and this correction
+is odd.
+
+For \(s=5\), write \(b=(c_1,c_2,-c_1,-c_2)\). Pairing opposite small
+coordinates gives
+\[
+\sum_a|u(y)+b(a)|=2\max(|u(y)|,|c_1|)+2\max(|u(y)|,|c_2|).
+\]
+If the potentials are integral, nonzero noninvariant \(u\) has norm at
+least two and variation at least four, giving \(e\ge6\). Nonzero
+invariant odd \(u\) costs more: \(\operatorname{ord}_p(5)\ge3\).
+When \(u=0\), nonzero \(b\) already gives \(e\ge p-1\ge6\). In
+the half-integral case the same lower bound \(e\ge p-1\) holds. Thus
+\(e=6\) and every other stratum is empty. The remaining small-only row
+consequently says \((T_p-1)b=0\). An integral nonzero \(b\) would
+force \(p=7\), equality, \(u=0\), and support on a single antipodal
+small pair; multiplication by \(7\equiv2\pmod5\) does not preserve it.
+In the half-integral case equality is possible only at \(p=7\), but
+would require an odd nowhere-zero \(u\) invariant under five, although
+\(5^3=-1\pmod7\). Hence \(b=0\). Then \(u\) is an integral single
+antipodal delta and the packet is standard-five.
+
+For \(s=3\) put \(b=(c,-c)\) and \(V(u)=\|T_3u-u\|_1\). The
+exact energy is
+\[
+e=\sum_{y\in U_p}\max(|u(y)|,|c|)+\tfrac12V(u)\le6.
+\tag{15}\label{eq:15}
+\]
+In the integral case, \(c\ne0\) forces \(p=7\), \(|c|=1\), and
+equality. Then \(V(u)=0\) and \(3^3=-1\pmod7\) give \(u=0\).
+If \(c=0\), the even norm \(k=\|u\|_1\) is \(2,4\), or \(6\).
+Norm two gives an actual four-entry surface block; norm four has variation
+at least four, and equality gives the quasi packet. Norm six requires
+three-invariance, hence \(p=13\) as above, with energy six.
+
+In the strict half-integral case \(p\le13\), so
+\(p\in\{7,11,13\}\). Also \(|c|=1/2\). At \(p=11,13\), a value
+of \(|u|\ge3/2\) already increases the first term by at least two and
+exceeds the budget. At \(p=7\), such a value would give first term at
+least five and variation at least six, also impossible. Thus every
+\(|u(y)|=1/2\). At \(p=13\) the first term is already six. At
+\(p=11\) it is five, and a nonconstant sign pattern on either five-cycle
+has total variation at least four on the negative pair of cycles; thus
+\(u\) is three-invariant and \(e=5\). At \(p=7\), \(U_7\) is a
+three-generated cycle with negation its half-period. Its three
+half-period signs have one or three sign changes on the path ending at
+the negative of the first; the full variations are two or six and the
+energies are four or six. This proves that only \(e=4,5,6\) occur.
+
+We finally justify actual ambient completions. At energy four with
+\(c=0\) the actual core is the explicit three-standard quartet. At
+energy four in the half-integral \(p=7\) case, the core has zero full
+21- and 7-conductor rows by \eqref{eq:14} and \(D=T_3u-u\). Its remaining odd
+row has conductor three and vanishes because \(1-\alpha_3(7)=0\).
+Fourier inversion therefore proves that these four actual entries form
+a Hodge quadruple. Inflating to the ambient level preserves this
+assertion. Subtracting its Hodge equations from the sextuple leaves a
+grade-one pair, necessarily opposite.
+
+At energy five, \(p=11\). The five positive entries form one small row
+times a coset of \(\langle3\rangle\subset U_{11}\). Their sum is
+\(11\) or \(22\) modulo \(33\). Thus the ambient zero-sum equation
+forces the sixth entry to have order three, and the completed tuple is a
+unit/permutation translate of
+\[
+(m/33)(1,4,16,22,25,31).
+\]
+At energy six, the two faces exhaust all six entries. All actual entries
+are multiples of \(m/(3p)\), so the full effective Hodge equations hold
+at \(3p\). For \(p>13\) the preceding integral classification already
+gave the quasi family. The remaining exact levels \(21,33,39\) are the
+finite lists in Section 9, and their blocks are algebraic by the
+constructions there. No omitted-large-factor row has been isolated before
+one of these actual completions.
+\end{proof}
+
+\section{The exact four-face system at level \(15M\)}\label{sec:8}
+
+Assume \(m=15M\), \((M,15)=1\). At a maximal active large part
+\(r\mid M\) write its four faces as
+\[
+F_{35}(a,b,y),\qquad F_3(a,y),\qquad F_5(b,y),\qquad D(y),
+\qquad a\in U_3,\ b\in U_5,\ y\in U_r.
+\]
+Here the subscripts abbreviate the exact orders \(15r,3r,5r,r\).
+We write \(E_s=E_{U_s}\), and \(N_s\) for negation of the
+\(U_s\)-coordinate. For a primitive large character \(\beta\), the top
+equation is
+\[
+P_r(I-E_3)(I-E_5)F_{35}=0.
+\tag{16}\label{eq:16}
+\]
+The edge equations, obtained from \eqref{eq:7}, are
+\[
+4\widehat F_3(\alpha_3,\beta)
++(1+\overline{\beta(5)})\widehat F_{35}(\alpha_3,1,\beta)=0,
+\tag{17}\label{eq:17}
+\]
+\[
+2\widehat F_5(\alpha_5,\beta)
++(1-\overline{\alpha_5(3)\beta(3)})
+\widehat F_{35}(1,\alpha_5,\beta)=0.
+\tag{18}\label{eq:18}
+\]
+The trivial-small equation is
+\[
+\begin{aligned}
+0={}&8\widehat D(\beta)
++4(1-\overline{\beta(3)})\widehat F_3(1,\beta)
++2(1-\overline{\beta(5)})\widehat F_5(1,\beta)\\
+&+(1-\overline{\beta(3)})(1-\overline{\beta(5)})
+\widehat F_{35}(1,1,\beta).
+\end{aligned}
+\tag{19}\label{eq:19}
+\]
+Parity ensures the even modes cause no additional conditions.
+
+\begin{lemma}[Pointwise additive reduction]\label{lemma:8.1}
+
+\(F_{35}(a,b,y)=u(a,y)+v(b,y)\) with integral potentials.
+
+\end{lemma}
+\begin{proof}
+
+Set \(D'_b(y)=F_{35}(1,b,y)-F_{35}(2,b,y)\) and
+\(H(y)=\pi_5D'(y)\), where \(\pi_5=I-E_5\). Then
+\(P_rH=0\), \(D'(-y)=N_5D'(y)\), and \(H(-y)=N_5H(y)\).
+Thus \(\operatorname{supp}H\) is negative-stable, but no parity is imposed
+on an individual rectangular difference. If \(r=1\), \(H=0\) immediately.
+
+Suppose \(H\ne0\). Since \(|\operatorname{supp}H|\le\|F_{35}\|_1\le12\),
+Lemma 2.2 applies. A single negative-stable fibre requires \(r=p\) and
+\(H\) constant. Then \(N_5H=H\), so every integral representative
+\(D'(y)\) is constant on antipodal small pairs and has norm at least two.
+Consequently \(\|F_{35}\|_1\ge2(p-1)\); equality forces \(p=7\), norm
+twelve, and
+\[
+D'(y)\in\{\epsilon\mathbf1_{\{1,4\}},-\epsilon\mathbf1_{\{2,3\}}\},
+\qquad D'(-y)=D'(y).
+\]
+If two fibres occur, they are opposite \(U_7\)-fibres in \(r=7R\),
+\(R>1\), and already require all twelve units of \(F_{35}\). There is
+one unit entry over each residual site. Injectivity of
+\((\epsilon,b)\mapsto\pi_5(\epsilon\delta_b)\) then gives
+\[
+D'(u,z)=\epsilon\delta_b,\qquad
+D'(u,-z)=\epsilon\delta_{-b}\quad(u\in U_7).
+\]
+These descriptions retain the possible row choice of each original
+\(F_{35}\) atom; the row difference, not a fictitious fixed row, is used
+below.
+
+Either alternative exhausts \eqref{eq:6}, so all other actual strata vanish. The
+omitted-seven row is now isolated. In the lone \(r=7\) case take
+\(\chi=\alpha_3\lambda_5\), where \(\lambda_5\) is quadratic. The row
+difference gives \(\widehat F_{35}(\chi)=12\epsilon\ne0\), while
+\(\chi(7)=-1\). In the paired case choose a primitive odd \(\beta\)
+on \(R\) and the two odd quartic characters \(\gamma_\pm\) of
+\(U_5\). Then \(\chi_\pm=\alpha_3\gamma_\pm\beta\) are odd, both
+detect the full multiplicity with coefficient
+\(12\epsilon\gamma_\pm(b)\beta(z)\), and have values
+\(\pm i\beta(7)\) at seven. At least one value is not one. In either
+case \eqref{eq:8} and primitive odd nonvanishing contradict \eqref{eq:7}. Thus \(H=0\).
+Fixing one row and one column supplies integral additive potentials directly.
+\end{proof}
+
+\begin{lemma}[essential-cross exclusion]\label{lemma:8.2}
+
+For \(r>1\), no additive slice of \(F_{35}\) genuinely varies in both
+the row and column directions.
+
+\end{lemma}
+\begin{proof}
+
+At an oriented residual pair \(\{y,-y\}\) the small matrix has physical
+mass at most six. Its integral common row difference \(d\) satisfies
+\(\|F_y\|_1\ge4|d|\) and the norm is even. Thus an essential slice has
+\(d=\pm1\) and mass four or six. A mass-two slice is row-invariant.
+
+Define \(G_3(y)=F_3(1,y)-F_3(2,y)\). Equation \eqref{eq:17} gives
+\[
+P_r(G_3-h_3)=0,\qquad h_3=-(I+T_5)d.
+\]
+The essential slice and its negative give the same unit value of \(d\)
+at \(y,-y\), so \(h_3\) is a nonzero constant \(c\) on the four
+distinct sites \(\{\pm y,\pm y/5\}\). If the total top mass is six,
+\(F_3=0\); the only possible additional mass-two slice does not change
+\(d\). A four-site kernel relation contradicts Lemma 2.1.
+
+Otherwise the top mass is four and at most two physical atoms remain.
+The correction \(K=G_3-h_3\) is even and has support at most eight.
+Lemma 2.2 and parity give \(K=0\) or \(r=7\) with \(K\) constant.
+If \(K=0\), the four-site \(G_3\) consumes both remaining atoms. Choose
+a nonprincipal column character \(\alpha_5\) detecting the nonconstant
+column potential \(w\) at \(y\). Its forced edge mode is
+\[
+h_5=\overline{\alpha_5(3)}T_3w-w,
+\]
+nonzero on four distinct residual sites. With no \(F_5\) atom remaining,
+this contradicts the scalar spark.
+
+If \(r=7\) and \(K=\lambda\mathbf1\ne0\), support at most four for
+\(G_3\) forces \(\lambda=-c\). Then \(G_3\) is supported on the
+complementary antipodal pair and consumes at least one physical atom,
+leaving at most one for \(F_5\). A single-atom \(F_5\) mode has at
+most two sites. It cannot differ from \(h_5\) by a constant on \(U_7\):
+a nonzero constant would require the four existing values of \(h_5\)
+all to be equal, since its two absent sites would already consume the two
+allowed sites. For the quadratic character \(h_5\) is odd and not
+constant; for a quartic character its values at \(y\) and \(y/3\) have
+ratio \(-\overline{\alpha_5(3)}=\pm i\). A zero constant leaves four
+sites. Contradiction.
+\end{proof}
+
+Appendix A records the independent finite classification of these
+additive matrices and its augmented-energy inequality. Lemma 8.2 uses
+the row-difference and column Fourier modes above; it does not interpret
+augmented energy as actual physical mass.
+
+If any row-only slice occurs, it has exactly four atoms. An additional
+mass-two column-only slice would make the top mass six and contradict
+the same \(G_3\) argument. Hence the four atoms form a complete
+\(U_5\)-row, that is, four members of \(L_5(c)\). Lemma 3.3 resolves
+it directly. The case \(r=1\) descends to the finite level fifteen in
+Section 9. We are left with the global column-only sector
+\[
+F_{35}(a,b,y)=v(b,y),\qquad k=\|v\|_1>0,\qquad\|F_{35}\|_1=2k.
+\tag{20}\label{eq:20}
+\]
+
+\subsection{Correction lifting and small-constant closure}\label{sec:8.1}
+
+Put
+\[
+(S_3v)(b,y)=v(3b,3y),\qquad g=S_3v-v,\qquad C=F_5-g.
+\]
+Equation \eqref{eq:18} gives \(P_r(I-E_5)C=0\), and
+\[
+\|C\|_1\le\|F_5\|_1+2k\le12-\|F_3\|_1-\|D\|_1.
+\tag{21}\label{eq:21}
+\]
+
+\begin{lemma}[correction is small-coordinate constant]\label{lemma:8.3}
+
+In \eqref{eq:20}, under the full Hodge system \eqref{eq:16}--\eqref{eq:19} and ledger \eqref{eq:6},
+\(C(b,y)=c(y)\), with integral odd \(c\).
+
+\end{lemma}
+\begin{proof}
+
+For \(r=1\) this is immediate. Let \(H(y)=\pi_5C(\cdot,y)\); now its
+actual parity is \(H(-y)=-N_5H(y)\). If \(H\ne0\), Lemma 2.2 applies
+using \(\|C\|_1\le12\). In a paired-fibre case, equality leaves one
+unit coefficient of \(C\) per residual site. The injective projected
+delta map fixes one small column on the first \(U_7\)-fibre and its
+negative column on the opposite fibre. Thus \(C\) uses just one
+antipodal small pair. A single self-opposite fibre requires \(r=p\).
+Then \(C(b,y)=a(b)+f(y)\) in the odd zero-mean gauge. The potentials
+are both integral or both half-integral, and
+\[
+\|C\|_1\ge(p-1)\|a\|_1\ge2(p-1)
+\]
+when \(a\ne0\). Hence \(p=7\) and every bound is an equality.
+In the integral case \(a\) is a unit antipodal delta and \(f=0\),
+again using only two small columns. In the half-integral case every
+potential value has absolute value \(1/2\), and
+\[
+C=\epsilon(\mathbf1_{R\times Z}-\mathbf1_{-R\times(-Z)}),
+\]
+where \(R\subset U_5\) and \(Z\subset U_7\) are transversals of the
+antipodal pairs, of sizes two and three.
+
+Every case has \(\|C\|_1=12\). Equality in \eqref{eq:21} makes \(F_3=D=0\),
+\(\|g\|_1=2k\), and every nonzero coefficient of \(C\) a unit.
+Equality in the triangle inequality then forces \(F_5\) and \(g\) to
+be disjoint, and \(v,S_3v\) to be disjoint with both supports inside
+\(\operatorname{supp}C\). A two-column support cannot contain both,
+since multiplication by three interchanges the two antipodal column
+pairs. In the half-integral rectangle,
+\(\operatorname{Agg}_5C=2\epsilon(\mathbf1_Z-\mathbf1_{-Z})\) is
+nonzero and odd, where \(\operatorname{Agg}_5\) sums the four columns.
+Choose an odd character \(\beta\) on \(U_7\) detecting it. Since five
+generates \(U_7\), \(\beta(5)\ne1\). The equality already exhausted
+all other strata. Substituting \(F_5=S_3v-v+C\) and \(F_{35}=v\) in
+\eqref{eq:19} cancels the \(v\)-terms and leaves
+\[
+2(1-\overline{\beta(5)})\widehat{\operatorname{Agg}_5C}(\beta)=0,
+\]
+a contradiction. Thus \(H=0\) and the assertion follows.
+\end{proof}
+
+The top plus five-face mass satisfies \(2k+\|F_5\|_1\ge8\).
+For \(k\ge4\) this is immediate. For \(k=2\), \(v\) is a unit
+antipodal delta, and \(g\) has one unit in each of four distinct
+residual slices. Adding a column-constant integer cannot reduce any such
+slice below norm one. At most four signed units remain for \(F_3,D\);
+its row difference is a \(P_r\)-kernel function with support at most
+four. Hence
+\[
+F_3(a,y)=b_3(y)
+\]
+by Lemma 2.1. The trivial-small row first gives only
+\[
+P_rK=0,\qquad K=D-(T_3-1)b_3-(T_5-1)c.
+\]
+Writing \(J=2k+\|F_5\|_1\), we have
+\[
+4\|c\|_1\le J,\qquad J+2\|b_3\|_1+\|D\|_1\le12,
+\]
+so \(\|K\|_1\le12-J+2\|c\|_1\le8\). For \(c\ne0\) use
+integral oddness \(\|c\|_1\ge2\) and \(J\ge4\|c\|_1\); for
+\(c=0\) use \(J\ge4\). Corollary 2.3 therefore gives \(K=0\).
+
+\begin{lemma}[small-constant closure]\label{lemma:8.4}
+
+\(c=b_3=D=0\) in the column-only sector.
+
+\end{lemma}
+\begin{proof}
+
+Assume \(c\ne0\). Then \(4\|c\|_1\le12\) and integral oddness give
+\(\|c\|_1=2\). Since \(J\ge8\), the remaining budget allows either
+\(b_3=0\), in which case \(D=(T_5-1)c\) has norm four, or
+\(\|b_3\|_1=2,D=0\). In both cases \(J\le8\). Thus
+\[
+8=\|C\|_1\le\|F_5\|_1+\|g\|_1
+\le\|F_5\|_1+2k=J\le8.
+\]
+As above, integrality and unit coefficients force \(v,S_3v\) to be
+disjoint and supported in \(C\). Its residual support is just
+\(\{z,-z\}\), so \(3z=\pm z\) would follow, impossible. Thus
+\(c=0\). Now \(D=(T_3-1)b_3\). If \(b_3\ne0\), the cost
+\(2\|b_3\|_1+\|(T_3-1)b_3\|_1\) is at least eight: norm two has
+variation four and norm at least four suffices already. The top and
+five-face cost is also at least eight, violating the ledger. Hence
+\(b_3=D=0\).
+\end{proof}
+
+Finally \(k+\tfrac12\|S_3v-v\|_1\le6\). Every \(S_3\) orbit has
+length divisible by four, owing to its \(U_5\) coordinate. Norm two
+gives an actual surface core and an inverse complementary pair.
+Lemma 2.5 turns norm four and variation four into two adjacent unit
+values and their negatives, and the same two-surface contraction identity
+used earlier. Norm six would require invariance; a negative-stable orbit
+then contributes zero and an exchanged pair would cost at least eight.
+Thus the nonzero mixed face always has an algebraic certificate.
+
+\section{Finite endpoints and their Chow realizations}\label{sec:9}
+
+\subsection{Complete finite orbit lists}\label{sec:9.1}
+
+At level fifteen the inverse-pair-free unit/permutation orbits have
+representatives
+\[
+(1,2,7,11,12,12),\qquad(1,4,7,10,10,13).
+\]
+The second is standard-five. With \(C(w)=L_3(w)\uplus\{-3w\}\), the
+first obeys
+\[
+(1,2,7,11,12,12)\uplus(6,9)=C(2)\uplus C(6).
+\]
+For \(p=7,11,13\), put
+\[
+Q_p=(1,1+p,1+2p,3+p,3+2p,3p-9)\pmod{3p}.
+\]
+The complete inverse-pair-free orbit lists are
+\[
+\begin{array}{c|l}
+p&\text{representatives}\\\hline
+7&Q_7,\ (1,4,9,15,16,18),\ (1,4,10,13,16,19),\\
+11&Q_{11},\ (1,4,16,22,25,31),\\
+13&Q_{13},\ (1,7,16,22,34,37),\ (1,14,16,22,29,35).
+\end{array}
+\]
+An exhaustive enumeration sets the sixth entry to \(3m\) minus the sum
+of the first five nondecreasing positive entries below \(m\), retains
+its legal nondecreasing range, excludes inverse pairs, and tests every
+unit equation. Sorting every unit translate gives canonical orbits.
+Comparison of the complete canonical sets gives the displayed lists.
+The unquotiented counts at \(15,21,33,39\) are \(6,12,14,24\); their
+orbit counts are \(2,3,2,3\). Appendix B retains the exact finite
+certificate at \(21,33,39\).
+
+\subsection{Chow realization of the finite leaves}\label{sec:9.2}
+
+The \(Q_p\) blocks satisfy
+\[
+Q_p\uplus(3,-3)=C(1)\uplus C(3)
+\]
+and are algebraic. The split closure is the one in Jumagulov
+\cite[Theorem 1.2, p.~4]{jumagulov2026}. The four split representatives admit
+\[
+\begin{array}{c|l}
+21&(1,4,16)*(9,15,18),\quad(1,4,16)*(10,13,19),\\
+39&(1,16,22)*(7,34,37),\quad(1,16,22)*(14,29,35).
+\end{array}
+\]
+Each triple sums to zero at its level. Since every unit translate of
+the juxtaposition is Hodge, the two curve characters have complementary
+types; their diagonal rational orbit is a \((1,1)\)-block on the product
+of curves. Lefschetz supplies a divisor there and Ran's algebraic join
+\cite[Section 4, pp.~138--139]{ran1980} maps it nontrivially to the fourfold block
+\cite[Proposition 4.6 and Corollary 4.7, p.~140]{ran1980}. This uses the divisor
+on the product; algebraicity of either curve character alone is not
+asserted. The rational projector argument in Section 3 gives the
+complete orbit.
+
+For the exceptional level-33 tuple
+\(w=(1,4,16,22,25,31)\), we use the certificate of Jumagulov
+\cite[Theorem 1.4, p.~5]{jumagulov2026}. The following \(w,a,Q,S,\beta,\gamma,\delta_0,\delta_1\)
+are the same tuples as there, and the level-66 completion, contractions,
+and descent by the squaring map are the same construction. Work at level
+66 with \(a=2w\) and
+\[
+\begin{aligned}
+a&=(2,8,32,44,50,62),& Q&=(1,25,44,62),\\
+S&=(2,8,32,41,50,65),&\delta_0&=(1,65,25,41),\\
+\beta&=(2,32,33,65),&\gamma&=(8,33,41,50),
+\end{aligned}
+\qquad\delta_1=(33,33).
+\]
+The three quadruples \(Q,\beta,\gamma\) are Hodge and
+\[
+a\uplus\delta_0=Q\uplus S,\qquad
+S\uplus\delta_1=\beta\uplus\gamma.
+\]
+Join \(\beta,\gamma\) to codimension three on \(X_{66}^6\) and
+contract \(\delta_1\) to obtain the codimension-two block of \(S\).
+Then join with \(Q\) to codimension four on \(X_{66}^8\) and contract
+the two pairs in \(\delta_0\), returning to codimension two on
+\(X_{66}^4\). The self-pair \((33,33)\) is a legitimate nonzero
+inverse pair at even level 66. This uses only that explicit even
+auxiliary variety. The squaring map \(X_{66}^4\to X_{33}^4\) has
+quotient group of order 32 acting trivially on \(a\); hence
+\(\pi^*\pi_*=32\) on that block and its algebraic image at level 33
+is nonzero. Reduction \(U_{66}\simeq U_{33}\) preserves the full orbit.
+The finite certificate checks all displayed Hodge conditions and multiset
+identities exactly.
+
+\section{The zero mixed face and global assembly}\label{sec:10}
+
+Retain the notation of Section 8 and first suppose \(r>1\) and
+\(F_{35}=0\). If exactly one of \(F_3,F_5\) is nonzero, Theorem 7.5
+applies. If both are zero, \(P_rD=0\); an odd nonzero large-factor
+kernel would have norm twelve by Corollary 2.3. This exhausts all strata
+and its omitted-seven row is detected by a primitive odd character on
+\(r/7\) avoiding one value at seven. Thus it is impossible.
+
+Suppose both small faces are nonzero. For \(r\) not prime, put
+\(H_s=\pi_sF_s\). Its negative-stable support is strictly smaller than
+twelve, since the other nonzero odd face already costs at least two
+units. Lemma 2.2 gives \(H_s=0\): a single self-opposite fibre requires
+\(r\) prime, and a paired fibre requires twelve sites. For \(r=p\)
+prime, write \(F_s(a,y)=c_s(a)+b_s(y)\) with odd integral or
+half-integral potentials. A nonzero \(c_5\) costs at least
+\((p-1)\|c_5\|_1\ge12\) signed units, impossible with \(F_3\ne0\).
+Thus \(c_5=0\) and \(F_5=b_5\) costs at least eight. A nonzero
+\(c_3\) then costs at least \(p-1\ge6\) signed units, again
+impossible. Consequently in every case
+\[
+F_3=b_3(y),\qquad F_5=b_5(y).
+\]
+Their signed costs are at least four and eight. Equality in the ledger
+makes each \(b_s\) a single antipodal delta and empties \(D\) and every
+other stratum. Only now are all residual rows isolated. Put
+\[
+K=(T_3-I)b_3+(T_5-I)b_5.
+\]
+The primitive odd rows of exact conductor \(r\), whose Bernoulli
+coefficients are nonzero, give \(P_rK=0\). The function \(K\) is
+integral and odd, and
+\[
+\|K\|_1\le2\|b_3\|_1+2\|b_5\|_1=8.
+\]
+By Corollary 2.3, a nonzero integral odd function in \(\ker P_r\)
+has norm at least twelve. Hence \(K=0\), proving
+\[
+(T_3-1)b_3+(T_5-1)b_5=0.
+\tag{22}\label{eq:22}
+\]
+On the basis \(e_y=\delta_y-\delta_{-y}\), indexed by
+\(U_r/\{\pm1\}\), each summand is an edge between distinct vertices.
+Equality of the two edges forces one of
+\[
+r\mid5-3,\qquad r\mid5+3,\qquad r\mid15-1,\qquad r\mid15+1.
+\]
+Every prime of \(r\) is at least seven, so \(r=7\) is the only
+nontrivial possibility. The equations then normalize to
+\(b_3=e_3,b_5=e_1\). The actual level-105 representative is
+\[
+(3,24,50,66,85,87)=(L_5(3)\setminus\{45\})\uplus\{50,85\},
+\]
+which is the example in Jumagulov \cite[Theorem 1.3, p.~4]{jumagulov2026} and is
+algebraic by Lemma 3.3. Unit translations and inflation cover
+the whole branch.
+
+\begin{proposition}[no small prime]\label{proposition:10.1}
+
+If every prime dividing an odd \(m\) is at least seven, every Hodge
+sextuple is a union of inverse pairs.
+
+\end{proposition}
+\begin{proof}
+
+For an inverse-pair-free input, take a maximal active exact order \(q\).
+Corollary 2.3 makes the only nonzero possibility a pair of opposite
+\(U_7\)-fibres at \(q=7R\), exhausting the ledger. Choose a primitive
+odd character on \(R\) with value at seven different from one, using
+the detector in Section 2. Its coefficient is nonzero and \eqref{eq:8} contradicts
+the single surviving row. After removing inverse pairs from a general
+sextuple, any nonempty remainder has even length at most four. Its odd
+ledger is at most eight, immediately excluded by the same kernel
+argument. Hence no remainder exists.
+\end{proof}
+
+\begin{theorem}[assembled odd-degree conclusion]\label{theorem:10.2}
+
+The classical geometric inputs in Section 3 and the arithmetic arguments
+above give
+\[
+\operatorname{cl}:CH^2(X_m^4)_{\mathbf Q}\twoheadrightarrow
+H^4(X_m^4,\mathbf Q)\cap H^{2,2}(X_m^4)
+\qquad\text{for every odd }m\ge3.
+\]
+
+\end{theorem}
+\begin{proof}
+
+By the classical character decomposition it suffices to realize each
+Hodge sextuple. An inverse pair is a surface-divisor leaf. Otherwise
+apply Corollary 7.4. Its explicit leaves are algebraic, or its finite
+power descent gives a Hodge tuple at a level with three- and five-adic
+exponents at most one. If neither small prime occurs, Proposition 10.1
+applies. If exactly one \(s\) occurs, choose a maximal active large
+part \(r\). For \(r>1\), a nonzero \(F_{sr}\) is covered by Theorem
+7.5; if it is zero the sole \(F_r\) is excluded by the odd-kernel and
+omitted-seven argument. For \(r=1\), all entries descend to the prime
+level \(s\), where \(P_sF_s=0\) and oddness force \(F_s=0\),
+contradicting activity. If both small primes occur, use the four-face
+arguments in Sections 8 and 10. At \(r>1\) they give an algebraic leaf
+or contradiction. At \(r=1\) every entry has order dividing fifteen;
+remove common content and apply the finite level-fifteen classification
+in Section 9. Every leaf uses actual cycles by Section 3 or Section 9;
+every passage back to the original level uses \eqref{eq:2}. The nonprimitive part
+is the square of the hyperplane class.
+\end{proof}
+
+\begin{proof}[Proof of Theorem 4.1]
+
+The preceding proof gives the stated classification as well as
+algebraicity. An inverse pair is the first alternative. Corollary 7.4
+either supplies a same-degree terminal certificate or removes common
+content; when that content exceeds one, this is the third alternative.
+At the reduced level, the maximal-large-part arguments of Theorem 7.5
+and Sections 8 and 10 give an actual terminal certificate or a
+contradiction. If the maximal large part is one, removing common content
+reduces to degree three, five, or fifteen. The first two are impossible
+for an inverse-pair-free input, and degree fifteen has the two explicit
+certificates of Section 9. All certificates are preserved by unit
+translation, permutation, and finite power-map transport. This proves
+Theorem 4.1 with the terminal definition of Section 4.
+\end{proof}
+
+\appendix
+\section{The \texorpdfstring{\(2\times4\)}{2 x 4} cyclic additive certificate}\label{sec:appA}
+
+We retain the complete finite cyclic additive certificate. Its augmented
+energy is a finite matrix invariant; the analytic essential-cross
+exclusion in Lemma 8.2 does not identify it with actual mass. Order the four
+\(U_5\)-columns by the multiplication-by-three cycle
+\[
+ (1,3,4,2).
+\]
+Let \(M=(m_{ij})\in\mathbf Z^{2\times4}\) satisfy
+\[
+ m_{ij}=u_i+v_j,
+ \qquad
+ 0<\|M\|_1\le6.
+\tag{A.1}\label{eq:A.1}
+\]
+Equivalently, after flattening by rows, the three equations
+\[
+ m_{1j}-m_{10}=m_{0j}-m_{00},
+ \qquad j=1,2,3,
+\tag{A.2}\label{eq:A.2}
+\]
+hold.  The exact equivalence group is generated by the row swap, cyclic
+rotation of the four columns, and multiplication of all coefficients by
+\(-1\).  Reflections and arbitrary column permutations are not allowed,
+because they do not preserve the multiplication-by-three dynamics.
+
+There are two exhaustive enumerations.  The first visits the full integer
+\(\ell^1\)-ball in eight coordinates:
+\[
+ \#\{x\in\mathbf Z^8:\|x\|_1\le6\}=40081
+\]
+and retains the 288 nonzero solutions of \eqref{eq:A.2}.  The second writes
+\[
+\begin{aligned}
+(m_{00},m_{01},m_{02},m_{03})
+   &=(a,a+c_1,a+c_2,a+c_3),\\
+(m_{10},m_{11},m_{12},m_{13})
+   &=(a+d,a+d+c_1,a+d+c_2,a+d+c_3).
+\end{aligned}
+\tag{A.3}\label{eq:A.3}
+\]
+The norm bound implies
+\[
+ |a|\le6,\qquad |d|,|c_j|\le12,
+\]
+so enumeration in these ranges is independently exhaustive.  The two
+canonical class sets agree.  They contain twenty-nine classes, with norm
+profile
+\[
+ \#\{\|M\|_1=2,4,6\}=(1,9,19).
+\tag{A.4}\label{eq:A.4}
+\]
+
+A class is essential when both \(d\ne0\) and the four entries of its first
+row are not all equal.  For a vector \(w\), set
+\[
+ q(w)=\min_{c\in\mathbf Z}\sum_i|w_i+c|.
+\tag{A.5}\label{eq:A.5}
+\]
+Then
+\[
+ q_{\rm row}=|d|,
+ \qquad
+ q_{\rm col}=q(m_{00},m_{01},m_{02},m_{03}).
+\tag{A.6}\label{eq:A.6}
+\]
+The eleven essential representatives and their augmented energies
+\[
+ E(M)=\|M\|_1+2q_{\rm row}+2q_{\rm col}
+\tag{A.7}\label{eq:A.7}
+\]
+are as follows.  Each displayed vector is flattened by rows.
+
+\[
+\begin{array}{c|r|c|r}
+M&\|M\|_1&(q_{\rm row},q_{\rm col})&E(M)\\\hline
+(-1,-1,-1,0;\ 0,0,0,1) & 4 & (1,1) & 8\\
+(-1,-1,0,0;\ 0,0,1,1) & 4 & (1,2) & 10\\
+(-1,0,-1,0;\ 0,1,0,1) & 4 & (1,2) & 10\\
+(-2,-1,-1,-1;\ -1,0,0,0) & 6 & (1,1) & 10\\
+(-2,-1,-1,0;\ -1,0,0,1) & 6 & (1,2) & 12\\
+(-2,-1,0,-1;\ -1,0,1,0) & 6 & (1,2) & 12\\
+(-2,-1,0,0;\ -1,0,1,1) & 6 & (1,3) & 14\\
+(-2,0,-1,-1;\ -1,1,0,0) & 6 & (1,2) & 12\\
+(-2,0,-1,0;\ -1,1,0,1) & 6 & (1,3) & 14\\
+(-2,0,0,-1;\ -1,1,1,0) & 6 & (1,3) & 14\\
+(-2,0,0,0;\ -1,1,1,1) & 6 & (1,2) & 12\\
+\end{array}
+\]
+
+Thus every essential class has \(E(M)\ge8>6\). This is the independent
+finite inequality certified by the table. As a diagnostic, quotienting
+incorrectly by the full symmetric
+group on four columns leaves only sixteen classes and collapses thirteen
+genuine cyclic classes.
+
+The supplementary verifier
+\( \texttt{verify\_mixed35\_c4\_additive\_classification.py} \)
+uses only integer arithmetic.  It asserts equality of the two enumerations,
+recomputes \eqref{eq:A.4}--\eqref{eq:A.7}, and fixes the canonical payload by SHA-256
+\[
+\texttt{6884de68c535501c5d08250dbb0d297fda791e05c767291166bce208600127dd}.
+\]
+The hash is an integrity check on the finite table, not evidence for any of
+the analytic arbitrary-conductor steps in Sections 6--10.
+
+\section{The pure one-small exception levels}\label{sec:appB}
+
+We give the finite classification used after the analytic one-small energy
+and ambient-transport arguments have reduced the pure tail to
+\[
+ m=3p,\qquad p\in\{7,11,13\}.
+ \tag{B.1}\label{eq:B.1}
+\]
+The equivalence group is exactly
+\[
+ U_{3p}\times\mathfrak S_6.
+ \tag{B.2}\label{eq:B.2}
+\]
+The symmetric group is removed by sorting the sextuple; multiplication by
+\(-1\) is already contained in \(U_{3p}\) and is not divided out again.
+
+Put
+\[
+ Q_p=(1,1+p,1+2p,3+p,3+2p,3p-9).
+ \tag{B.3}\label{eq:B.3}
+\]
+This represents the quasi orbit. Up to \eqref{eq:B.2}, the complete lists of
+inverse-pair-free grade-three Hodge sextuples are
+\[
+\begin{array}{c|l}
+p&\text{orbit representatives}\\ \hline
+7&
+Q_7,\ (1,4,9,15,16,18),\ (1,4,10,13,16,19),\\
+11&
+Q_{11},\ (1,4,16,22,25,31),\\
+13&
+Q_{13},\ (1,7,16,22,34,37),
+(1,14,16,22,29,35).
+\end{array}
+\tag{B.4}\label{eq:B.4}
+\]
+The second orbit at \(p=11\) is the level-33 exceptional block, whose
+algebraicity certificate is due to Jumagulov \cite[Theorem 1.4, p.~5]{jumagulov2026}
+(arXiv:2608.18134). The remaining
+nonquasi representatives are precisely the split packets appearing in
+Section 9.2.
+
+Here is an exhaustive certificate for \eqref{eq:B.4}. For fixed \(m=3p\), sort the
+six entries and enumerate the first five by combinations with repetition.
+The \(t=1\) Hodge row determines the last entry uniquely:
+\[
+ a_6=3m-\sum_{i=1}^5a_i.
+ \tag{B.5}\label{eq:B.5}
+\]
+Retain it only when \(a_5\le a_6<m\), discard every tuple containing an
+opposite pair, and test
+\[
+ \sum_{i=1}^6\langle ta_i\rangle_m=3m
+ \qquad(t\in U_m).
+ \tag{B.6}\label{eq:B.6}
+\]
+Finally replace every survivor by the lexicographically least sorted unit
+translate. This visits every unordered sextuple once before quotienting and
+therefore proves exhaustiveness. The numbers retained before taking unit
+orbits, followed by the orbit counts, are
+\[
+\begin{array}{c|c|c}
+p&\text{retained sextuples}&\text{unit orbits}\\ \hline
+7&12&3\\
+11&14&2\\
+13&24&3.
+\end{array}
+\tag{B.7}\label{eq:B.7}
+\]
+Direct comparison of the canonical sets gives exactly \eqref{eq:B.4}.
+
+The supplementary verifier
+\[
+\begin{gathered}
+\texttt{calculations/bundles/fermat-level15m-pure-small-exception-levels/}\\
+\texttt{verify\_pure\_small\_exception\_levels.py}
+\end{gathered}
+\]
+uses only integer arithmetic and asserts the canonical-set equality, not
+merely the counts \eqref{eq:B.7}. On OMEN it returns
+\[
+\texttt{pure\_exception\_levels=PASS}.
+\]
+
+In the preceding energy reduction, energy four contains an actual
+grade-two block; the two remaining entries have grade one and are forced to
+be opposite, so this case returns to the decomposable branch. Energy five
+occurs only at \(p=11\): the strict-half-integral prefix is unique and the
+ambient sum determines the sixth entry, giving the level-33 exceptional
+representative in \eqref{eq:B.4}. The energy-six survivors are the quasi and split
+packets listed there. Their Chow realizations are those already used in
+Section 9.2.
+
+Appendix B certifies only the effective levels \eqref{eq:B.1}. The arbitrary-\(M\)
+transport, full-depth residual-factor detectors, and four-face
+globalization are the analytic arguments in the body of the paper.
+
+\begin{landscape}
+
+\section{Branch, budget, and geometric dependencies}\label{sec:appC}
+
+Table \ref{tab:assembly} records the dependencies of Theorem 10.2,
+separately from the finite certificate lists in Section 9 and Appendices
+A--B. Write \(\delta_u=(u,-u)\), and let \(B\) denote an actual Hodge
+quadruple. In the last column, a sequence such as \(2,2\to6\to4\)
+records Fermat dimensions at the stated level: two surface-divisor
+sources, their join, and inverse-pair contraction back to the fourfold.
+The direct standard-five cycle has codimension two on \(X_m^4\);
+joining it with a surface divisor and contracting twice gives
+\(4,2\to8\to4\). Ran's primitive injectivity and Aoki's
+Theorem 1-4(ii) give nonvanishing for these operations (Lemma 3.1),
+and Aoki's Theorem 2-1 gives it for the standard cycle (Lemma 3.2).
+
+The condition \(r=1\) concerns the maximal \emph{active} large part; it does
+not assert that the ambient large part \(M\) is one. In every geometric
+row, the full rational block is obtained by applying the rational deck
+projector of Section 3 to a cycle with nonzero character-line projection
+and taking its deck translates.
+
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.12\linewidth}>{\raggedright\arraybackslash}p{0.13\linewidth}>{\raggedright\arraybackslash}p{0.18\linewidth}>{\raggedright\arraybackslash}p{0.17\linewidth}>{\raggedright\arraybackslash}p{0.19\linewidth}>{\raggedright\arraybackslash}p{\dimexpr0.21\linewidth-30pt\relax}@{}}
+\caption{Branches, budgets, and geometric certificates.}\label{tab:assembly}\\
+\toprule
+Branch & Maximal active order & Twelve-unit budget & When omitted-factor rows are available & Actual multiset identity or outcome & Source--target; nonvanishing \\
+\midrule
+\endfirsthead
+\multicolumn{6}{l}{\textit{Table \thetable\ continued.}}\\
+\toprule
+Branch & Maximal active order & Twelve-unit budget & When omitted-factor rows are available & Actual multiset identity or outcome & Source--target; nonvanishing \\
+\midrule
+\endhead
+\midrule
+\multicolumn{6}{r}{\textit{Continued on the next page.}}\\
+\endfoot
+\bottomrule
+\endlastfoot
+Inverse pair & None needed. & Resolved before the inverse-pair-free ledger \eqref{eq:6}. & Not used. & \(A=B\uplus\delta_u\). & \(0,2\to4\); Lemma 3.1.\\
+\addlinespace
+High three-depth & \(q=3^i5^jr\), \(i\ge2\), maximal among active orders divisible by nine. & Residual boundary or essential mass six exhausts all entries; mass five forces the sixth into order \(q\). & Not used; maximality isolates the primitive \(q\)-row. & \eqref{eq:4}, \eqref{eq:5}, or \(A=L_5(c)\uplus\{-5c\}\). & \(2,2\to6\to4\), standard cycle on \(X_m^4\), or \(4,2\to8\to4\); Lemmas 3.1--3.3, Theorem 7.1.\\
+\addlinespace
+High five-depth, after high three & Maximal active base \(h=5^jr\), \(j\ge2\); faces \(h,3h\). & Residual boundary exhausts twelve. After \(C=0\), \(k=4\) and variation four exhaust twelve; \(k=2\) gives a four-entry core. & Omitted seven is used only after the residual boundary exhausts the ledger. & Standard-five; \(A=B\uplus\delta_u\); or \(S_c\uplus S_{3c}\) \(=A\uplus\delta_{3dc}\). & Standard cycle, \(0,2\to4\), or \(2,2\to6\to4\); Lemmas 3.1--3.3, Theorem 7.3.\\
+\addlinespace
+Common content & All active orders now have three- and five-depth at most one. & No exhaustion needed; valuation bounds force common divisibility. & Not used. & \(A=cA_0\), with \(c\) from Corollary 7.4; strict descent only for \(c>1\). & \(X_m^4\to X_{m/c}^4\); scalar \(c^5\) in \eqref{eq:2}.\\
+\addlinespace
+No small prime; or only \(D\) at the chosen large part & Maximal active exact order \(q\), or maximal active large part \(r>1\). & The only possible nonzero odd kernel is a pair of opposite \(U_7\)-fibres, of norm twelve. & Omitted seven is isolated after equality empties every other stratum. & Inverse-pair-free case impossible; without small primes, \(A=\biguplus_{i=1}^3\delta_{u_i}\). & \(0,2\to4\) for inverse pairs; Lemma 3.1, Proposition 10.1 and Section 10.\\
+\addlinespace
+One small face, \(e=4\) & Maximal active large part \(r>1\); faces \(sr,r\). & Eight units form an actual Hodge quadruple; its two complements are inverse. & No omitted-large-factor row is needed for this ambient completion. & \(A=B\uplus\delta_u\). & \(0,2\to4\); Lemma 3.1, Theorem 7.5.\\
+\addlinespace
+One small face, \(e=5\) & \(s=3\), \(r=11\), selected as a maximal active large part. & Ten units form the prefix; the zero-sum equation forces the sixth entry, of order three. & No omitted-large-factor row is used before actual completion. & \(A=(m/33)w\), up to units and permutation; \(a\uplus\delta_0=Q\uplus S\), \(S\uplus\delta_1=\beta\uplus\gamma\). & At 66: \(2,2\to6\to4\), then \(4,2\to8\to4\); \(X_{66}^4\to X_{33}^4\) has scalar 32; Section 9.2, then \eqref{eq:2}.\\
+\addlinespace
+One small face, \(e=6\) & Maximal active large part \(r>1\); prime cases \(r=p\). & \(\|F_{sr}\|_1+\|F_r\|_1=12\); all other strata empty. & Effective remaining rows are now available. The earlier paired-fibre alternative uses omitted seven only after \(\|F_{sr}\|_1=12\). & Standard-five; \(S_c\uplus S_{3c}\) \(=A\uplus\delta_{3dc}\); or the \(Q_p\), split-triple, and level-33 identities of Section 9.2. & Standard cycle; \(2,2\to6\to4\); divisor on \(X_m^1\times X_m^1\to X_m^4\) via Ran \cite[Proposition 4.6, p.~140]{ran1980}; or the 66-to-33 certificate.\\
+\addlinespace
+Mixed \(F_{35}\ne0\) & Maximal active large part \(r>1\); faces \(15r,3r,5r,r\). & Exceptional top kernels cost twelve. Nonconstant \(C\) forces equality in \eqref{eq:21}. Surviving column norm four with variation four exhausts twelve. & Lemma 8.1: omitted seven after top exhaustion. Lemma 8.3: residual row after equality in \eqref{eq:21}. Earlier actual completions need neither. & \eqref{eq:5}; \(A=B\uplus\delta_u\); or the two-surface contraction identity of Theorem 7.3. & \(4,2\to8\to4\), \(0,2\to4\), or \(2,2\to6\to4\); Lemmas 3.1--3.3 and 8.1--8.4.\\
+\addlinespace
+Mixed \(F_{35}=0\), both small faces nonzero & Maximal active large part \(r>1\). & The faces cost at least four and eight; equality makes each \(b_s\) one antipodal delta and empties all other strata. & All residual rows only after equality; exact-conductor-\(r\) rows and Corollary 2.3 give \eqref{eq:22}. & \(r=7\); the level-105 representative is \((L_5(3)\setminus\{45\})\uplus\{50,85\}\), as displayed in Section 10. & \(4,2\to8\to4\) via \eqref{eq:5}; Lemmas 3.1--3.3; \cite[Theorem 1.3, p.~4]{jumagulov2026}.\\
+\addlinespace
+Maximal active \(r=1\) & Every active order divides \(s\), or divides 15 when both small primes occur; ambient \(M\) need not be one. & No further exhaustion; common content removes the inactive ambient large part. & Not used. & Prime levels 3 and 5 impossible; at 15, standard-five or \((1,2,7,11,12,12)\) \(\uplus(6,9)=C(2)\uplus C(6)\). & Standard cycle or \(2,2\to6\to4\) at 15; Lemmas 3.1--3.3, Section 9, and transport by \eqref{eq:2}.\\
+\end{longtable}
+\endgroup
+\end{landscape}
+
+\begin{thebibliography}{12}
+\bibitem{aoki1987}
+N. Aoki, \emph{Some new algebraic cycles on Fermat varieties}, J. Math. Soc.
+   Japan \textbf{39} (1987), no. 3, 385--396.
+   \href{https://doi.org/10.2969/jmsj/03930385}{doi:10.2969/jmsj/03930385}.
+\bibitem{dasilva2021}
+G. da Silva Jr., \emph{Notes on the Hodge conjecture for Fermat varieties},
+   Experimental Results \textbf{2} (2021), e22.
+   \href{https://doi.org/10.1017/exp.2021.14}{doi:10.1017/exp.2021.14}.
+\bibitem{jumagulov2026}
+R. Jumagulov, *The Hodge conjecture for Fermat fourfolds of odd degree at
+   most 199*, arXiv:2608.18134 (2026).
+\bibitem{kang2015}
+S.-J. Kang, \emph{Refined motivic dimension}, Canad. Math. Bull. \textbf{58} (2015),
+   519--529.
+   \href{https://doi.org/10.4153/CMB-2015-018-4}{doi:10.4153/CMB-2015-018-4}.
+\bibitem{kang2016}
+S.-J. Kang, \emph{Refined motivic dimension of some Fermat varieties}, Bull.
+   Aust. Math. Soc. \textbf{93} (2016), 223--230.
+   \href{https://doi.org/10.1017/S0004972715001379}{doi:10.1017/S0004972715001379}.
+\bibitem{ran1980}
+Z. Ran, \emph{Cycles on Fermat hypersurfaces}, Compositio Math. \textbf{42} (1980), no. 1,
+   121--142.
+   \href{https://www.numdam.org/item/CM_1980__42_1_121_0/}{NUMDAM}.
+\bibitem{shiodakatsura1979}
+T. Shioda and T. Katsura, \emph{On Fermat varieties}, Tohoku Math. J. \eqref{eq:2}
+   \textbf{31} (1979), 97--115.
+   \href{https://doi.org/10.2748/TMJ/1178229881}{doi:10.2748/TMJ/1178229881}.
+\bibitem{shioda1979}
+T. Shioda, \emph{The Hodge conjecture for Fermat varieties}, Math. Ann. \textbf{245}
+   (1979), 175--184.
+   \href{https://doi.org/10.1007/BF01428804}{doi:10.1007/BF01428804}.
+\bibitem{schoen1989}
+C. Schoen, *Cyclic covers of \(P^v\) branched along \(v+2\) hyperplanes
+   and the generalized Hodge conjecture for certain abelian varieties*, in
+   \emph{Arithmetic of Complex Manifolds}, Lecture Notes in Mathematics \textbf{1399},
+   Springer, 1989, 137--154.
+   \href{https://doi.org/10.1007/BFb0095974}{doi:10.1007/BFb0095974}.
+\bibitem{dlmf}
+NIST Digital Library of Mathematical Functions, §25.15, *Dirichlet \(L\)-functions*,
+    equations \href{https://dlmf.nist.gov/25.15.E5}{25.15.5},
+    \href{https://dlmf.nist.gov/25.15.E9}{25.15.9}, and
+    \href{https://dlmf.nist.gov/25.15.E10}{25.15.10}; see also
+    \href{https://dlmf.nist.gov/27.10.E11}{27.10.11} for the primitive Gauss sum.
+    \href{https://dlmf.nist.gov/25.15}{https://dlmf.nist.gov/25.15}.
+    Version 1.2.7, released 15 June 2026; accessed 7 September 2026.
+\bibitem{aoki2000}
+N. Aoki, *Some remarks on the Hodge conjecture for abelian varieties of
+    Fermat type*, Comment. Math. Univ. Sancti Pauli \textbf{49} (2000), no. 2,
+    177--194.
+    \href{https://doi.org/10.14992/00009819}{doi:10.14992/00009819}.
+\bibitem{aoki2002}
+N. Aoki, \emph{Hodge cycles on CM abelian varieties of Fermat type}, Comment.
+    Math. Univ. Sancti Pauli \textbf{51} (2002), no. 1, 99--130.
+    \href{https://doi.org/10.14992/00008725}{doi:10.14992/00008725}.
+\end{thebibliography}
+\end{document}
