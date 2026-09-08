@@ -1,6 +1,7 @@
 # The Hodge Conjecture for Odd-Degree Fermat Fourfolds
 
 [![Verify Lean certificates](https://github.com/Li-Hongmin/hodge-odd-fermat-fourfolds/actions/workflows/verify.yml/badge.svg)](https://github.com/Li-Hongmin/hodge-odd-fermat-fourfolds/actions/workflows/verify.yml)
+[![DOI](https://img.shields.io/badge/DOI-10.13140%2FRG.2.2.26853.77288-blue)](https://doi.org/10.13140/RG.2.2.26853.77288)
 
 **An AI-generated proof, released for human verification.**
 
@@ -28,6 +29,10 @@ Correspondence: lihongmin@edu.k.u-tokyo.ac.jp. Substantive verification or corre
 ## Relation to prior work
 
 Kang (Bull. Aust. Math. Soc. 93, 2016, Corollary 3.2) states a stronger result — the generalized Hodge conjecture for Fermat varieties of dimensions three and four in arbitrary degree — via refined motivic dimension. Section 1.1 of the manuscript explains why we treat that statement as a precedent rather than an input, and identifies a specific step in the product argument (Kang 2015, Proposition 2.2(iv)) that we were unable to confirm. We do not claim to have disproved Kang's statement. An expert opinion on this point is especially welcome.
+
+## Cite
+
+Hongmin Li, *The Hodge Conjecture for Odd-Degree Fermat Fourfolds*, preprint, September 2026. DOI: [10.13140/RG.2.2.26853.77288](https://doi.org/10.13140/RG.2.2.26853.77288). Source and certificates: this repository.
 
 ## Contents
 
